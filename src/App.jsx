@@ -501,7 +501,7 @@ function HighlightCard() {
 }
 
 function MainPage() {
-  const isLive = false;
+  const isLive = true;
   const [viewerCount, setViewerCount] = useState(1847);
 
   useEffect(() => {
