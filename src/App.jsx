@@ -115,7 +115,7 @@ export default function BabaRewardsLandingPage() {
         </h1>
 
         <a
-          href="https://www.spacehills.com/"
+          href="#socials"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-12 rounded-sm bg-emerald-400 px-12 py-5 text-lg font-black uppercase tracking-wide text-[#07110d] shadow-[0_0_45px_rgba(31,217,132,.24)] transition hover:bg-emerald-300"
@@ -123,7 +123,7 @@ export default function BabaRewardsLandingPage() {
           I'M OVER 18! LET ME IN!
         </a>
 
-        <div className="mt-20 grid w-full max-w-5xl gap-6 md:grid-cols-3">
+        <div id="socials" className="mt-20 grid w-full max-w-5xl gap-6 md:grid-cols-3">
           <SocialCard
             href="https://kick.com/bigbetbaba"
             icon="kick"
