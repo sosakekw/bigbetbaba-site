@@ -150,7 +150,7 @@ function LandingPage({ onEnter }) {
 
 function LoadingScreen() {
   useEffect(() => {
-    const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3');
+    const audio = new Audio('/jackpot.mp3');
     audio.volume = 0.28;
     audio.play().catch(() => {});
 
@@ -229,14 +229,6 @@ function LoadingScreen() {
 }
 
 function MainPage() {
-  const activity = [
-    'Kick stream ready',
-    'Discord community open',
-    'Code BABA active',
-    'New clips on YouTube',
-    'Babayanbreaks link live',
-  ];
-
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
       <PageBackground />
@@ -292,8 +284,8 @@ function MainPage() {
           <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
             <div>
               <div className="flex items-center gap-2 text-base font-black tracking-[0.12em] text-slate-200">
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
-                BigBetBaba offline
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                Kick stream
               </div>
               <div className="mt-1 text-sm text-slate-500">kick.com/bigbetbaba</div>
             </div>
@@ -361,8 +353,8 @@ function MainPage() {
           <a href="https://babayanbreaks.com/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/35">
             <div className="mb-5 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-white p-2">
               <img
-                src="/spacehills.png"
-                alt="Spacehills logo"
+                src="/babayanbreaks.png"
+                alt="Babayanbreaks logo"
                 className="h-full w-full object-contain"
               />
             </div>
