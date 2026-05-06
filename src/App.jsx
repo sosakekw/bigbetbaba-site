@@ -68,6 +68,7 @@ function TestPanel() {
     hasThreeSocialCards: true,
     hasBabaReels: true,
     hasClickableAgeEnter: true,
+    hasSeoComponent: true,
   };
 
   return (
@@ -150,6 +151,40 @@ function Styles() {
       }
     `}</style>
   );
+}
+
+function SEO() {
+  useEffect(() => {
+    document.title = "BIGBETBABA — Streams, Clips & Community";
+
+    const tags = [
+      ["property", "og:title", "BIGBETBABA — Streams, Clips & Community"],
+      ["property", "og:description", "Watch BIGBETBABA live, viral roulette wins and join the community."],
+      ["property", "og:image", "https://www.bigbetbaba.com/roulette-thumbnail.png"],
+      ["property", "og:url", "https://www.bigbetbaba.com/"],
+      ["property", "og:type", "website"],
+      ["name", "twitter:card", "summary_large_image"],
+      ["name", "twitter:title", "BIGBETBABA"],
+      ["name", "twitter:description", "Live casino streams, viral wins and community rewards."],
+      ["name", "twitter:image", "https://www.bigbetbaba.com/roulette-thumbnail.png"],
+      ["name", "theme-color", "#53FC18"],
+    ];
+
+    tags.forEach(([attr, key, content]) => {
+      const selector = `meta[${attr}="${key}"]`;
+      let meta = document.head.querySelector(selector);
+
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute(attr, key);
+        document.head.appendChild(meta);
+      }
+
+      meta.setAttribute("content", content);
+    });
+  }, []);
+
+  return null;
 }
 
 function Background({ mouse }) {
@@ -412,7 +447,7 @@ function LoadingScreen() {
             </div>
 
             <div className="mt-4 rounded-2xl border border-[#53FC18]/30 bg-[#53FC18]/10 px-6 py-3 text-center text-lg font-black tracking-[0.12em] text-[#53FC18] shadow-[0_0_24px_rgba(83,252,24,.12)]">
-              LOADING\.\.\.
+              LOADING...
             </div>
           </div>
 
@@ -696,72 +731,6 @@ function MainPage() {
   );
 }
 
-function SEO() {
-  useEffect(() => {
-    document.title = "BIGBETBABA — Streams, Clips & Community";
-
-    const metaTags = [
-      {
-        property: "og:title",
-        content: "BIGBETBABA — Streams, Clips & Community",
-      },
-      {
-        property: "og:description",
-        content: "Watch BIGBETBABA live, viral roulette wins and join the community.",
-      },
-      {
-        property: "og:image",
-        content: "https://www.bigbetbaba.com/roulette-thumbnail.png",
-      },
-      {
-        property: "og:url",
-        content: "https://www.bigbetbaba.com/",
-      },
-      {
-        property: "og:type",
-        content: "website",
-      },
-      {
-        name: "twitter:card",
-        content: "summary_large_image",
-      },
-      {
-        name: "twitter:title",
-        content: "BIGBETBABA",
-      },
-      {
-        name: "twitter:description",
-        content: "Live casino streams, viral wins and community rewards.",
-      },
-      {
-        name: "twitter:image",
-        content: "https://www.bigbetbaba.com/roulette-thumbnail.png",
-      },
-      {
-        name: "theme-color",
-        content: "#53FC18",
-      },
-    ];
-
-    metaTags.forEach((tag) => {
-      const meta = document.createElement("meta");
-
-      if (tag.property) {
-        meta.setAttribute("property", tag.property);
-      }
-
-      if (tag.name) {
-        meta.setAttribute("name", tag.name);
-      }
-
-      meta.setAttribute("content", tag.content);
-      document.head.appendChild(meta);
-    });
-  }, []);
-
-  return null;
-}
-
 export default function App() {
   const [screen, setScreen] = useState("landing");
 
@@ -776,7 +745,6 @@ export default function App() {
   return (
     <>
       <SEO />
-
       {screen === "loading" ? (
         <LoadingScreen />
       ) : screen === "main" ? (
