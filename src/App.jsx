@@ -259,7 +259,6 @@ function MainPage() {
 
           <div className="hidden items-center gap-2 md:flex">
             {[
-              ["Home", "#home"],
               ["Babayanbreaks", "https://babayanbreaks.com/"],
               ["Kick", "https://kick.com/bigbetbaba"],
               ["Discord", "https://discord.gg/XM92x385n"],
@@ -270,7 +269,7 @@ function MainPage() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className={`rounded-lg px-5 py-3 text-sm font-extrabold tracking-normal antialiased transition hover:bg-white/10 ${index === 0 ? "bg-emerald-400/10 text-emerald-300 ring-1 ring-emerald-400/20" : "text-slate-200 hover:text-white"}`}
+                className="rounded-lg px-5 py-3 text-sm font-extrabold tracking-normal text-slate-200 antialiased transition hover:bg-emerald-400/10 hover:text-emerald-300 hover:ring-1 hover:ring-emerald-400/20"
               >
                 {label}
               </a>
