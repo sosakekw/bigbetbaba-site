@@ -194,6 +194,36 @@ function SocialCard({ href, icon, label, action, colorClass }) {
   );
 }
 
+function SpacehillsCard() {
+  return (
+    <a
+      href={LINKS.spacehills}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative overflow-hidden rounded-2xl border border-[#53FC18]/20 bg-gradient-to-b from-[#0f1722] to-[#120d11] p-5 text-center shadow-xl shadow-black/25 transition duration-300 hover:-translate-y-0.5 hover:border-[#53FC18]/50 hover:shadow-[0_0_40px_rgba(83,252,24,.14)]"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(83,252,24,.12),transparent_48%)] opacity-70" />
+      <div className="relative mx-auto mb-4 flex h-16 items-center justify-center">
+        <img
+          src="/spacehills.png"
+          alt="Spacehills logo"
+          className="max-h-14 w-auto max-w-[180px] object-contain drop-shadow-[0_0_18px_rgba(83,252,24,.18)] transition duration-300 group-hover:scale-105"
+        />
+      </div>
+
+      <div className="relative text-xl font-black tracking-tight text-white">SPACEHILLS</div>
+
+      <div className="relative mt-3 text-lg text-white">
+        »Code <span className="font-black text-[#53FC18]">BABA</span>«
+      </div>
+
+      <div className="relative mt-5 rounded-xl bg-[#53FC18] px-5 py-3 text-sm font-black text-[#07110d] shadow-[0_0_24px_rgba(83,252,24,.16)] transition duration-300 group-hover:bg-emerald-300">
+        Sign up
+      </div>
+    </a>
+  );
+}
+
 function LandingPage({ onEnter }) {
   const [mouse, setMouse] = useState({ x: 50, y: 50 });
   const [pressed, setPressed] = useState(false);
@@ -487,12 +517,8 @@ function MainPage() {
       </nav>
 
       <section id="home" className="relative z-10 mx-auto max-w-7xl px-4 pb-8 pt-8 text-center sm:px-5 sm:pb-10 sm:pt-12">
-        <div className="relative mx-auto mb-7 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-[#53FC18]/50 bg-[#111723] p-1.5 shadow-[0_0_42px_rgba(83,252,24,.12)]">
-          <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-full w-full rounded-full object-cover" />
-          <span className="pointer-events-none absolute inset-y-0 -left-8 w-6 bg-white/30 blur-sm" style={{ animation: "logoShine 8s ease-in-out infinite" }} />
-        </div>
 
-        <div className="mx-auto mt-2 max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#0d121b]/90 text-left shadow-2xl shadow-black/40 md:translate-x-6">
+        <div className="mx-auto mt-0 max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#0d121b]/90 text-left shadow-2xl shadow-black/40 md:translate-x-6">
           <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
             <div>
               <div className="flex items-center gap-2 text-base font-black tracking-[0.08em] text-slate-200">
@@ -551,22 +577,23 @@ function MainPage() {
           <HighlightCard />
         </div>
 
-        <div className="mx-auto mt-8 grid max-w-6xl gap-5 md:grid-cols-[1.1fr_.9fr_1fr]">
-          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-[#53FC18]/30">
-            <div className="text-2xl font-black text-white">Code BABA</div>
-            <p className="mt-2 text-sm font-semibold text-slate-400">Use it when signing up on Spacehills.</p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-[#53FC18]/30">
-            <div className="text-2xl font-black text-white">Kick stream</div>
-            <p className="mt-2 text-sm font-semibold text-slate-400">Catch live sessions and stream moments.</p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-[#53FC18]/30">
-            <div className="text-2xl font-black text-white">Discord</div>
-            <p className="mt-2 text-sm font-semibold text-slate-400">Get updates, drops and community posts.</p>
-          </div>
+        <div className="mx-auto mt-8 grid max-w-5xl gap-4 md:translate-x-6 md:grid-cols-3">
+          <SpacehillsCard />
+
+          <a href={LINKS.kick} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-5 text-center shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-[#53FC18]/35">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#53FC18] text-[#07110d]"><Icon type="kick" className="h-8 w-8" /></div>
+            <h3 className="text-xl font-black text-white">Kick</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Watch live</p>
+          </a>
+
+          <a href={LINKS.discord} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-5 text-center shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-[#53FC18]/35">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#5865F2] text-white"><Icon type="discord" className="h-8 w-8" /></div>
+            <h3 className="text-xl font-black text-white">Discord</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Join community</p>
+          </a>
         </div>
 
-        <div className="mx-auto mt-4 max-w-6xl rounded-xl border border-yellow-300/15 bg-yellow-300/[0.03] px-5 py-4 text-center text-sm font-bold text-yellow-200">
+        <div className="mx-auto mt-4 max-w-5xl rounded-xl border border-yellow-300/15 bg-yellow-300/[0.03] px-5 py-4 text-center text-sm font-bold text-yellow-200">
           18+ only. Play responsibly. Never play with money you cannot afford to lose.
         </div>
       </section>
