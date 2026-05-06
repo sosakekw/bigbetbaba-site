@@ -52,7 +52,7 @@ function SocialCard({ href, icon, label, action, colorClass }) {
       </div>
       <div className="text-left">
         <div className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">{label}</div>
-        <div className="text-4xl font-black uppercase tracking-tight text-white">{action}</div>
+        <div className="text-4xl font-black tracking-tight text-white">{action}</div>
       </div>
     </a>
   );
@@ -84,8 +84,8 @@ function LandingPage({ onEnter }) {
           <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-full w-full rounded-full object-cover" />
         </div>
 
-        <div className="mb-5 text-lg font-medium uppercase tracking-[0.28em] text-emerald-300 sm:text-2xl">
-          The best casino rewards, streams and community
+        <div className="mb-5 text-lg font-medium tracking-[0.18em] text-emerald-300 sm:text-2xl">
+          Watch streams, claim rewards and join the community
         </div>
 
         <h1 className="text-6xl font-black uppercase tracking-[-0.06em] text-white sm:text-7xl md:text-8xl">
@@ -95,14 +95,14 @@ function LandingPage({ onEnter }) {
         <button
           type="button"
           onClick={onEnter}
-          className="mt-12 rounded-sm bg-emerald-400 px-12 py-5 text-lg font-black uppercase tracking-wide text-[#07110d] shadow-[0_0_45px_rgba(31,217,132,.24)] transition hover:bg-emerald-300"
+          className="mt-12 rounded-lg bg-emerald-400 px-12 py-5 text-lg font-black tracking-wide text-[#07110d] shadow-[0_0_28px_rgba(31,217,132,.20)] transition hover:bg-emerald-300"
         >
-          I'M OVER 18! LET ME IN!
+          I’m over 18 — enter
         </button>
 
         <div className="mt-20 grid w-full max-w-5xl gap-6 md:grid-cols-3">
           <SocialCard href="https://kick.com/bigbetbaba" icon="kick" label="Kick" action="Watch" colorClass="bg-[#53FC18] text-[#07110d]" />
-          <SocialCard href="https://discord.gg/XM92x385n" icon="discord" label="Discord" action="Join!" colorClass="bg-[#5865F2] text-white" />
+          <SocialCard href="https://discord.gg/XM92x385n" icon="discord" label="Discord" action="Join" colorClass="bg-[#5865F2] text-white" />
           <SocialCard href="https://www.youtube.com/@BIGBETBABA" icon="youtube" label="YouTube" action="Videos" colorClass="bg-[#FF0000] text-white" />
         </div>
 
@@ -141,8 +141,8 @@ function LoadingScreen() {
         <div className="relative">
           <div className="rounded-[28px] border border-white/10 bg-[#10141d] p-5 shadow-2xl shadow-black/50" style={{ animation: 'softGlow 1.4s ease-in-out infinite' }}>
             <div className="mb-4 flex items-center justify-between px-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-300">BigBetBaba</span>
-              <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">Loading</span>
+              <span className="text-xs font-semibold tracking-[0.18em] text-emerald-300">BigBetBaba</span>
+              <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">Getting ready</span>
             </div>
 
             <div className="flex gap-3 rounded-2xl border border-white/10 bg-[#070a11] p-4 shadow-inner shadow-black/60">
@@ -158,8 +158,8 @@ function LoadingScreen() {
               ))}
             </div>
 
-            <div className="mt-4 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-6 py-3 text-center text-xl font-black uppercase tracking-[0.18em] text-emerald-300">
-              Jackpot
+            <div className="mt-4 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-6 py-3 text-center text-xl font-black tracking-[0.12em] text-emerald-300">
+              BABA loaded
             </div>
           </div>
 
@@ -187,7 +187,7 @@ function MainPage() {
             <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-12 w-12 rounded-full object-cover ring-2 ring-emerald-400/60" />
             <div>
               <div className="text-lg font-black tracking-wide">BIGBETBABA</div>
-              <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">Live community</div>
+              <div className="text-xs font-bold tracking-[0.16em] text-emerald-300">Live community</div>
             </div>
           </div>
 
@@ -204,7 +204,7 @@ function MainPage() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className={`rounded-lg px-4 py-3 text-xs font-black uppercase tracking-[0.18em] transition hover:bg-white/10 ${index === 0 ? "bg-emerald-400/10 text-emerald-300 ring-1 ring-emerald-400/20" : "text-slate-300"}`}
+                className={`rounded-lg px-4 py-3 text-xs font-black tracking-[0.12em] transition hover:bg-white/10 ${index === 0 ? "bg-emerald-400/10 text-emerald-300 ring-1 ring-emerald-400/20" : "text-slate-300"}`}
               >
                 {label}
               </a>
@@ -230,7 +230,10 @@ function MainPage() {
         <div className="mx-auto mt-2 max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-[#0d121b]/90 text-left shadow-2xl shadow-black/40">
           <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
             <div>
-              <div className="text-base font-black uppercase tracking-[0.18em] text-emerald-300">BIGBETBABA Live</div>
+              <div className="flex items-center gap-2 text-base font-black tracking-[0.12em] text-emerald-300">
+                <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
+                BigBetBaba live
+              </div>
               <div className="mt-1 text-sm text-slate-500">kick.com/bigbetbaba</div>
             </div>
             <a
@@ -239,11 +242,17 @@ function MainPage() {
               rel="noopener noreferrer"
               className="rounded-full bg-[#53FC18] px-5 py-3 text-sm font-black text-[#07110d] transition hover:bg-emerald-300"
             >
-              WATCH LIVE
+              Watch live
             </a>
           </div>
 
-          <div className="relative h-[320px] bg-[#050806] md:h-[440px]">
+          <div className="relative h-[300px] bg-[#050806] md:h-[400px]">
+            <div className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(circle_at_center,rgba(34,197,94,.08),transparent_45%)] text-center">
+              <div>
+                <div className="text-lg font-black text-white">Stream preview</div>
+                <div className="mt-2 text-sm text-slate-500">If the player is blocked, use the Watch live button.</div>
+              </div>
+            </div>
             <iframe
               title="BIGBETBABA Kick live player"
               src="https://player.kick.com/bigbetbaba"
@@ -257,26 +266,31 @@ function MainPage() {
 
         <div className="mx-auto mt-10 grid max-w-6xl gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20">
-            <div className="text-3xl font-black text-white">BABA</div>
-            <p className="mt-2 text-sm font-semibold text-slate-400">Community partner code.</p>
+            <div className="text-3xl font-black text-white">Code BABA</div>
+            <p className="mt-2 text-sm font-semibold text-slate-400">Use it when signing up on Spacehills.</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20">
-            <div className="text-3xl font-black text-white">Kick</div>
-            <p className="mt-2 text-sm font-semibold text-slate-400">Watch streams and live updates.</p>
+            <div className="text-3xl font-black text-white">Kick stream</div>
+            <p className="mt-2 text-sm font-semibold text-slate-400">Catch live sessions and stream moments.</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20">
             <div className="text-3xl font-black text-white">Discord</div>
-            <p className="mt-2 text-sm font-semibold text-slate-400">Join the community hub.</p>
+            <p className="mt-2 text-sm font-semibold text-slate-400">Get updates, drops and community posts.</p>
           </div>
         </div>
 
         <div className="mx-auto mt-4 max-w-6xl rounded-xl border border-yellow-300/15 bg-yellow-300/[0.03] px-5 py-4 text-center text-sm font-bold text-yellow-200">
-          18+ only. Gamble responsibly. Never gamble with money you cannot afford to lose.
+          18+ only. Play responsibly. Never play with money you cannot afford to lose.
         </div>
       </section>
 
       <section id="babayanbreaks" className="relative z-10 mx-auto max-w-7xl px-5 pb-20">
-        
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">Community links</h2>
+            <p className="mt-2 text-sm text-slate-500">Fast access to the places people actually use.</p>
+          </div>
+        </div>
 
         <div className="grid gap-5 md:grid-cols-3">
           <a href="https://babayanbreaks.com/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/35">
