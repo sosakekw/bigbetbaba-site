@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 const LINKS = {
   kick: "https://kick.com/bigbetbaba",
@@ -659,7 +660,22 @@ export default function App() {
     }, delay);
   }
 
-  if (screen === "loading") return <LoadingScreen />;
-  if (screen === "main") return <MainPage />;
-  return <LandingPage onEnter={handleEnter} />;
+  if (screen === "loading") return (
+    <>
+      <LoadingScreen />
+      <Analytics />
+    </>
+  );
+  if (screen === "main") return (
+    <>
+      <MainPage />
+      <Analytics />
+    </>
+  );
+  return (
+    <>
+      <LandingPage onEnter={handleEnter} />
+      <Analytics />
+    </>
+  );
 }
