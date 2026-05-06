@@ -132,7 +132,7 @@ export default function BabaRewardsLandingPage() {
             colorClass="bg-[#53FC18] text-[#07110d]"
           />
           <SocialCard
-            href="https://discord.com/invite/leftlanepapi"
+            href="https://discord.gg/XM92x385n"
             icon="discord"
             label="Discord"
             action="Join!"
