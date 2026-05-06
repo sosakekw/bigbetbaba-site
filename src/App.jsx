@@ -45,7 +45,7 @@ function SocialCard({ href, icon, label, action, colorClass }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center gap-5 rounded-3xl border border-white/10 bg-black/25 px-7 py-6 backdrop-blur-sm transition hover:-translate-y-1 hover:border-emerald-400/40 hover:bg-black/35"
+      className="group flex items-center gap-5 rounded-2xl border border-white/10 bg-[#0d121b]/80 px-6 py-5 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/35 hover:bg-[#111827]"
     >
       <div className={`flex h-20 w-20 items-center justify-center rounded-2xl ${colorClass} shadow-lg shadow-black/40`}>
         <Icon type={icon} className="h-10 w-10" />
@@ -62,14 +62,14 @@ function PageBackground() {
   return (
     <>
       <div
-        className="absolute inset-0 opacity-35"
+        className="absolute inset-0 opacity-20"
         style={{
           backgroundImage:
-            "linear-gradient(30deg, rgba(255,255,255,.045) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.045) 87.5%, rgba(255,255,255,.045)), linear-gradient(150deg, rgba(255,255,255,.045) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.045) 87.5%, rgba(255,255,255,.045)), linear-gradient(90deg, rgba(255,255,255,.025) 2%, transparent 2.5%, transparent 97%, rgba(255,255,255,.025) 97.5%, rgba(255,255,255,.025))",
-          backgroundSize: "92px 160px",
+            "linear-gradient(30deg, rgba(255,255,255,.035) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.035) 87.5%, rgba(255,255,255,.035)), linear-gradient(150deg, rgba(255,255,255,.035) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.035) 87.5%, rgba(255,255,255,.035))",
+          backgroundSize: "110px 190px",
         }}
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(31,217,132,.18),transparent_34%),linear-gradient(180deg,rgba(7,10,17,.08),rgba(7,10,17,.92))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,197,94,.13),transparent_32%),linear-gradient(180deg,rgba(7,10,17,.15),rgba(7,10,17,.94))]" />
     </>
   );
 }
@@ -116,70 +116,59 @@ function LandingPage({ onEnter }) {
 
 function LoadingScreen() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
-      <PageBackground />
+    <main className="relative min-h-screen overflow-hidden bg-[#06080d] text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(34,197,94,.14),transparent_34%),linear-gradient(180deg,#080b12_0%,#05070c_100%)]" />
 
       <style>{`
-        @keyframes reelSpin {
-          0% { transform: translateY(-120px); }
-          100% { transform: translateY(0px); }
+        @keyframes reelDrop {
+          0% { transform: translateY(-110%); filter: blur(4px); }
+          65% { transform: translateY(8%); filter: blur(1px); }
+          100% { transform: translateY(0); filter: blur(0); }
         }
 
-        @keyframes handlePull {
-          0% { transform: rotate(0deg); }
-          40% { transform: rotate(28deg); }
-          100% { transform: rotate(0deg); }
+        @keyframes leverPull {
+          0%, 100% { transform: rotate(-12deg); }
+          45% { transform: rotate(36deg); }
         }
 
-        @keyframes glowPulse {
-          0%, 100% { opacity: 0.7; }
-          50% { opacity: 1; }
+        @keyframes softGlow {
+          0%, 100% { box-shadow: 0 0 24px rgba(34,197,94,.18); }
+          50% { box-shadow: 0 0 42px rgba(34,197,94,.34); }
         }
       `}</style>
 
-      <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-5 text-center">
-        <div className="mb-8 text-sm font-black uppercase tracking-[0.3em] text-emerald-300">
-          Loading BIGBETBABA
-        </div>
+      <section className="relative z-10 flex min-h-screen items-center justify-center px-5">
+        <div className="relative">
+          <div className="rounded-[28px] border border-white/10 bg-[#10141d] p-5 shadow-2xl shadow-black/50" style={{ animation: 'softGlow 1.4s ease-in-out infinite' }}>
+            <div className="mb-4 flex items-center justify-between px-2">
+              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-300">BigBetBaba</span>
+              <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">Loading</span>
+            </div>
 
-        <div className="relative rounded-[40px] border-2 border-yellow-400/20 bg-[#141924] px-8 py-10 shadow-[0_0_90px_rgba(31,217,132,.18)] backdrop-blur-sm">
-          <div className="absolute -right-20 top-10 hidden md:flex items-center">
-            <div className="h-4 w-14 rounded-full bg-gradient-to-r from-gray-500 to-gray-300 shadow-lg shadow-black/40" />
+            <div className="flex gap-3 rounded-2xl border border-white/10 bg-[#070a11] p-4 shadow-inner shadow-black/60">
+              {['B', 'A', 'B', 'A'].map((symbol, index) => (
+                <div key={`${symbol}-${index}`} className="relative flex h-28 w-20 items-center justify-center overflow-hidden rounded-xl bg-[#151b26] ring-1 ring-white/10">
+                  <div
+                    className="font-mono text-6xl font-black text-white"
+                    style={{ animation: `reelDrop .75s ${index * 0.12}s cubic-bezier(.2,.9,.25,1) both` }}
+                  >
+                    {symbol}
+                  </div>
+                </div>
+              ))}
+            </div>
 
-            <div
-              className="origin-left"
-              style={{ animation: 'handlePull 1.4s ease-in-out infinite' }}
-            >
-              <div className="relative flex items-center">
-                <div className="h-3 w-24 rounded-full bg-gradient-to-r from-gray-300 to-gray-500 shadow-inner shadow-black/40" />
-                <div className="absolute right-[-18px] h-11 w-11 rounded-full border-4 border-red-300 bg-red-500 shadow-[0_0_25px_rgba(255,0,0,.65)]" />
-              </div>
+            <div className="mt-4 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-6 py-3 text-center text-xl font-black uppercase tracking-[0.18em] text-emerald-300">
+              Jackpot
             </div>
           </div>
 
-          <div className="mb-6 flex items-center justify-center gap-3">
-            {['B', 'A', 'B', 'A'].map((symbol, index) => (
-              <div
-                key={symbol}
-                className="relative flex h-32 w-20 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#0c1119] shadow-inner shadow-black/40"
-              >
-                <div
-                  className="flex h-full w-full items-center justify-center font-black text-6xl text-yellow-300"
-                  style={{
-                    animation: `reelSpin ${0.7 + index * 0.2}s ease-out infinite alternate`
-                  }}
-                >
-                  {symbol}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div
-            className="rounded-2xl bg-gradient-to-r from-emerald-400 to-green-300 px-10 py-4 text-4xl font-black uppercase tracking-tight text-[#07110d]"
-            style={{ animation: 'glowPulse 1s ease-in-out infinite' }}
-          >
-            JACKPOT!
+          <div className="absolute -right-12 top-16 hidden md:block">
+            <div className="h-16 w-8 rounded-r-xl border border-white/10 bg-[#151b26]" />
+            <div className="absolute left-4 top-2 origin-top" style={{ animation: 'leverPull 1.1s ease-in-out infinite' }}>
+              <div className="h-24 w-2 rounded-full bg-slate-400" />
+              <div className="-ml-4 -mt-2 h-10 w-10 rounded-full bg-red-500 shadow-lg shadow-red-950/40" />
+            </div>
           </div>
         </div>
       </section>
@@ -192,7 +181,7 @@ function MainPage() {
     <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
       <PageBackground />
 
-      <nav className="relative z-10 border-b border-white/10 bg-[#0b0d16]/85 backdrop-blur-md">
+      <nav className="relative z-10 border-b border-white/10 bg-[#080b12]/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
           <div className="flex items-center gap-3">
             <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-12 w-12 rounded-full object-cover ring-2 ring-emerald-400/60" />
@@ -238,7 +227,7 @@ function MainPage() {
           <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-full w-full rounded-full object-cover" />
         </div>
 
-        <div className="mx-auto mt-2 max-w-6xl overflow-hidden rounded-[32px] border border-emerald-400/20 bg-black/30 text-left shadow-2xl shadow-black/30">
+        <div className="mx-auto mt-2 max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-[#0d121b]/90 text-left shadow-2xl shadow-black/40">
           <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
             <div>
               <div className="text-base font-black uppercase tracking-[0.18em] text-emerald-300">BIGBETBABA Live</div>
@@ -266,22 +255,22 @@ function MainPage() {
           </div>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-6xl gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-black/25 p-6 shadow-xl shadow-black/20">
+        <div className="mx-auto mt-10 grid max-w-6xl gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20">
             <div className="text-3xl font-black text-white">BABA</div>
             <p className="mt-2 text-sm font-semibold text-slate-400">Community partner code.</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-black/25 p-6 shadow-xl shadow-black/20">
+          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20">
             <div className="text-3xl font-black text-white">Kick</div>
             <p className="mt-2 text-sm font-semibold text-slate-400">Watch streams and live updates.</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-black/25 p-6 shadow-xl shadow-black/20">
+          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20">
             <div className="text-3xl font-black text-white">Discord</div>
             <p className="mt-2 text-sm font-semibold text-slate-400">Join the community hub.</p>
           </div>
         </div>
 
-        <div className="mx-auto mt-4 max-w-6xl rounded-xl border border-yellow-300/20 bg-yellow-300/5 px-5 py-4 text-center text-sm font-bold text-yellow-200">
+        <div className="mx-auto mt-4 max-w-6xl rounded-xl border border-yellow-300/15 bg-yellow-300/[0.03] px-5 py-4 text-center text-sm font-bold text-yellow-200">
           18+ only. Gamble responsibly. Never gamble with money you cannot afford to lose.
         </div>
       </section>
@@ -290,7 +279,7 @@ function MainPage() {
         
 
         <div className="grid gap-5 md:grid-cols-3">
-          <a href="https://babayanbreaks.com/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-emerald-400/20 bg-[#101620]/80 p-7 transition hover:-translate-y-1 hover:border-emerald-400/50">
+          <a href="https://babayanbreaks.com/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/35">
             <div className="mb-5 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-white p-2">
               <img
                 src="/spacehills.png"
@@ -302,13 +291,13 @@ function MainPage() {
             <p className="mt-3 leading-7 text-slate-400">Visit Babayanbreaks for live breaks, collectibles and community events.</p>
           </a>
 
-          <a href="https://kick.com/bigbetbaba" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-emerald-400/20 bg-[#101620]/80 p-7 transition hover:-translate-y-1 hover:border-emerald-400/50">
+          <a href="https://kick.com/bigbetbaba" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/35">
             <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#53FC18] text-[#07110d]"><Icon type="kick" className="h-9 w-9" /></div>
             <h3 className="text-2xl font-black text-white">Watch live</h3>
             <p className="mt-3 leading-7 text-slate-400">Follow BIGBETBABA on Kick for live streams and community moments.</p>
           </a>
 
-          <a href="https://discord.gg/XM92x385n" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-emerald-400/20 bg-[#101620]/80 p-7 transition hover:-translate-y-1 hover:border-emerald-400/50">
+          <a href="https://discord.gg/XM92x385n" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/35">
             <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#5865F2] text-white"><Icon type="discord" className="h-9 w-9" /></div>
             <h3 className="text-2xl font-black text-white">Community support</h3>
             <p className="mt-3 leading-7 text-slate-400">Join Discord for reward help, updates, giveaways and announcements.</p>
