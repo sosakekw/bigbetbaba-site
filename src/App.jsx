@@ -409,7 +409,7 @@ function MainPage() {
 
         <div className="grid gap-5 md:grid-cols-3">
           <a href="https://babayanbreaks.com/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-emerald-400/35">
-            <div className="mb-5 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-white p-2">
+            <div className="mb-5 flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#0b0f16] p-2">
               <img
                 src="/babayanbreaks.png"
                 alt="Babayanbreaks logo"
