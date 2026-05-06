@@ -143,13 +143,17 @@ function LoadingScreen() {
         </div>
 
         <div className="relative rounded-[40px] border-2 border-yellow-400/20 bg-[#141924] px-8 py-10 shadow-[0_0_90px_rgba(31,217,132,.18)] backdrop-blur-sm">
-          <div className="absolute -right-14 top-16 hidden md:block">
-            <div className="relative flex flex-col items-center">
-              <div
-                className="h-28 w-3 rounded-full bg-gradient-to-b from-gray-300 to-gray-500"
-                style={{ animation: 'handlePull 1.4s ease-in-out infinite' }}
-              />
-              <div className="-mt-2 h-10 w-10 rounded-full bg-red-500 shadow-[0_0_25px_rgba(255,0,0,.65)]" />
+          <div className="absolute -right-20 top-10 hidden md:flex items-center">
+            <div className="h-4 w-14 rounded-full bg-gradient-to-r from-gray-500 to-gray-300 shadow-lg shadow-black/40" />
+
+            <div
+              className="origin-left"
+              style={{ animation: 'handlePull 1.4s ease-in-out infinite' }}
+            >
+              <div className="relative flex items-center">
+                <div className="h-3 w-24 rounded-full bg-gradient-to-r from-gray-300 to-gray-500 shadow-inner shadow-black/40" />
+                <div className="absolute right-[-18px] h-11 w-11 rounded-full border-4 border-red-300 bg-red-500 shadow-[0_0_25px_rgba(255,0,0,.65)]" />
+              </div>
             </div>
           </div>
 
@@ -234,29 +238,32 @@ function MainPage() {
           <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-full w-full rounded-full object-cover" />
         </div>
 
-        <div className="mb-5 text-base font-medium uppercase tracking-[0.24em] text-emerald-300 sm:text-xl">
-          Premium casino rewards for the community
-        </div>
+        <div className="mx-auto mt-2 max-w-6xl overflow-hidden rounded-[32px] border border-emerald-400/20 bg-black/30 text-left shadow-2xl shadow-black/30">
+          <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
+            <div>
+              <div className="text-base font-black uppercase tracking-[0.18em] text-emerald-300">BIGBETBABA Live</div>
+              <div className="mt-1 text-sm text-slate-500">kick.com/bigbetbaba</div>
+            </div>
+            <a
+              href="https://kick.com/bigbetbaba"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-[#53FC18] px-5 py-3 text-sm font-black text-[#07110d] transition hover:bg-emerald-300"
+            >
+              WATCH LIVE
+            </a>
+          </div>
 
-        <h1 className="mx-auto max-w-5xl text-5xl font-black uppercase leading-[0.92] tracking-[-0.045em] text-white drop-shadow-[0_4px_0_rgba(31,217,132,.16)] sm:text-6xl md:text-8xl">
-          BIGBETBABA rewards and streams
-        </h1>
-
-        <p className="mx-auto mt-7 max-w-3xl text-lg font-semibold leading-8 text-slate-300">
-          Use code <span className="font-black text-white">BABA</span> on Spacehills, join the Discord for updates, and watch BIGBETBABA live on Kick.
-        </p>
-
-        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a href="https://www.spacehills.com/" target="_blank" rel="noopener noreferrer" className="rounded-lg bg-emerald-400 px-7 py-4 font-black text-[#07110d] shadow-[0_0_32px_rgba(31,217,132,.24)] transition hover:-translate-y-0.5 hover:bg-emerald-300">
-            Sign Up With BABA
-          </a>
-          <a href="https://kick.com/bigbetbaba" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/15 bg-white/5 px-7 py-4 font-black text-white transition hover:-translate-y-0.5 hover:bg-white/10">
-            Watch On Kick
-          </a>
-        </div>
-
-        <div className="mx-auto mt-5 flex w-fit items-center gap-4 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-300">
-          Use code <span className="font-mono text-2xl tracking-[0.18em] text-emerald-300">BABA</span> on Spacehills
+          <div className="relative aspect-\[16/7\] bg-[#050806] max-h-\[520px\]">
+            <iframe
+              title="BIGBETBABA Kick live player"
+              src="https://kick.com/bigbetbaba"
+              className="absolute inset-0 h-full w-full border-0"
+              loading="lazy"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowFullScreen
+            />
+          </div>
         </div>
 
         <div className="mx-auto mt-12 grid max-w-6xl gap-4 md:grid-cols-3">
