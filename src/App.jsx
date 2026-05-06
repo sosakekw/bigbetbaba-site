@@ -9,6 +9,12 @@ const LINKS = {
   clip: "https://kick.com/bigbetbaba/clips/clip_01KQNDG9BK3FBJ72V0WY340WET",
 };
 
+const SLOT_SOUNDS = [
+  "/jackpot.mp3?v=3",
+  "/slot-win-1.mp3?v=3",
+  "/slot-win-2.mp3?v=3",
+];
+
 function Icon({ type, className = "" }) {
   const common = {
     className,
@@ -132,11 +138,6 @@ function Styles() {
       @keyframes countPulse {
         0%, 100% { opacity: .88; transform: translateY(0); }
         50% { opacity: 1; transform: translateY(-1px); }
-      }
-
-      @keyframes softParallax {
-        0%, 100% { transform: translate3d(0,0,0); }
-        50% { transform: translate3d(0,-6px,0); }
       }
     `}</style>
   );
@@ -263,7 +264,8 @@ function LoadingScreen() {
   const [soundOn, setSoundOn] = useState(true);
 
   useEffect(() => {
-    const audio = new Audio("/jackpot.mp3?v=2");
+    const randomSound = SLOT_SOUNDS[Math.floor(Math.random() * SLOT_SOUNDS.length)];
+    const audio = new Audio(randomSound);
     audio.volume = 0.35;
 
     if (soundOn) {
@@ -375,11 +377,7 @@ function HighlightCard() {
             />
           </div>
         ) : (
-          <button
-            type="button"
-            onClick={() => setIsPlaying(true)}
-            className="relative block w-full text-left"
-          >
+          <button type="button" onClick={() => setIsPlaying(true)} className="relative block w-full text-left">
             <img
               src="/roulette-thumbnail.png"
               alt="28k roulette win"
@@ -437,7 +435,7 @@ function MainPage() {
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setViewerCount((count) => count + (Math.random() > 0.5 ? 7 : -4));
+      setViewerCount((count) => Math.max(0, count + (Math.random() > 0.5 ? 7 : -4)));
     }, 2600);
 
     return () => window.clearInterval(timer);
@@ -549,25 +547,8 @@ function MainPage() {
           </div>
         </div>
 
-        <div className="mx-auto mt-8 grid max-w-5xl gap-5 md:translate-x-6 md:grid-cols-[1.35fr_.65fr]">
+        <div className="mx-auto mt-8 max-w-5xl md:translate-x-6">
           <HighlightCard />
-
-          <div className="grid gap-5">
-            <div className="rounded-3xl border border-white/10 bg-[#0d121b]/80 p-6 text-left shadow-xl shadow-black/20" style={{ animation: "softParallax 6s ease-in-out infinite" }}>
-              <div className="text-xs font-bold uppercase tracking-[0.14em] text-[#53FC18]">Last big hit</div>
-              <div className="mt-3 text-4xl font-black tracking-[-0.05em] text-white">€28,080</div>
-              <div className="mt-2 text-sm leading-6 text-slate-400">Roulette clip from the latest stream highlight.</div>
-            </div>
-
-            <div className="rounded-3xl border border-white/10 bg-[#0d121b]/80 p-6 text-left shadow-xl shadow-black/20">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[#53FC18]">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-[#53FC18]" />
-                Active daily
-              </div>
-              <div className="mt-3 text-2xl font-black text-white">Discord + Kick</div>
-              <div className="mt-2 text-sm leading-6 text-slate-400">Join for drops, stream alerts and community updates.</div>
-            </div>
-          </div>
         </div>
 
         <div className="mx-auto mt-8 grid max-w-6xl gap-5 md:grid-cols-[1.1fr_.9fr_1fr]">
