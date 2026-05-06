@@ -114,6 +114,75 @@ function LandingPage({ onEnter }) {
   );
 }
 
+function LoadingScreen() {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
+      <PageBackground />
+
+      <style>{`
+        @keyframes reelSpin {
+          0% { transform: translateY(-120px); }
+          100% { transform: translateY(0px); }
+        }
+
+        @keyframes handlePull {
+          0% { transform: rotate(0deg); }
+          40% { transform: rotate(28deg); }
+          100% { transform: rotate(0deg); }
+        }
+
+        @keyframes glowPulse {
+          0%, 100% { opacity: 0.7; }
+          50% { opacity: 1; }
+        }
+      `}</style>
+
+      <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-5 text-center">
+        <div className="mb-8 text-sm font-black uppercase tracking-[0.3em] text-emerald-300">
+          Loading BIGBETBABA
+        </div>
+
+        <div className="relative rounded-[40px] border-2 border-yellow-400/20 bg-[#141924] px-8 py-10 shadow-[0_0_90px_rgba(31,217,132,.18)] backdrop-blur-sm">
+          <div className="absolute -right-14 top-16 hidden md:block">
+            <div className="relative flex flex-col items-center">
+              <div
+                className="h-28 w-3 rounded-full bg-gradient-to-b from-gray-300 to-gray-500"
+                style={{ animation: 'handlePull 1.4s ease-in-out infinite' }}
+              />
+              <div className="-mt-2 h-10 w-10 rounded-full bg-red-500 shadow-[0_0_25px_rgba(255,0,0,.65)]" />
+            </div>
+          </div>
+
+          <div className="mb-6 flex items-center justify-center gap-3">
+            {['B', 'A', 'B', 'A'].map((symbol, index) => (
+              <div
+                key={symbol}
+                className="relative flex h-32 w-20 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#0c1119] shadow-inner shadow-black/40"
+              >
+                <div
+                  className="flex h-full w-full items-center justify-center font-black text-6xl text-yellow-300"
+                  style={{
+                    animation: `reelSpin ${0.7 + index * 0.2}s ease-out infinite alternate`
+                  }}
+                >
+                  {symbol}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div
+            className="rounded-2xl bg-gradient-to-r from-emerald-400 to-green-300 px-10 py-4 text-4xl font-black uppercase tracking-tight text-[#07110d]"
+            style={{ animation: 'glowPulse 1s ease-in-out infinite' }}
+          >
+            JACKPOT!
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 function MainPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
@@ -244,6 +313,22 @@ function MainPage() {
 }
 
 export default function App() {
-  const [entered, setEntered] = useState(false);
-  return entered ? <MainPage /> : <LandingPage onEnter={() => setEntered(true)} />;
+  const [screen, setScreen] = useState("landing");
+
+  function handleEnter() {
+    setScreen("loading");
+    window.setTimeout(() => {
+      setScreen("main");
+    }, 1800);
+  }
+
+  if (screen === "loading") {
+    return <LoadingScreen />;
+  }
+
+  if (screen === "main") {
+    return <MainPage />;
+  }
+
+  return <LandingPage onEnter={handleEnter} />;
 }
