@@ -67,6 +67,7 @@ function TestPanel() {
     hasClipPreview: true,
     hasThreeSocialCards: true,
     hasBabaReels: true,
+    hasClickableAgeEnter: true,
   };
 
   return (
@@ -138,6 +139,14 @@ function Styles() {
       @keyframes countPulse {
         0%, 100% { opacity: .88; transform: translateY(0); }
         50% { opacity: 1; transform: translateY(-1px); }
+      }
+
+      @keyframes hoverReelSpin {
+        0% { transform: translateY(0); filter: blur(0); }
+        22% { transform: translateY(-135%); filter: blur(4px); }
+        48% { transform: translateY(115%); filter: blur(4px); }
+        72% { transform: translateY(-28%); filter: blur(1px); }
+        100% { transform: translateY(0); filter: blur(0); }
       }
     `}</style>
   );
@@ -263,17 +272,49 @@ function LandingPage({ onEnter }) {
           Watch streams, claim rewards and join the community
         </p>
 
-        <h1 className="text-5xl font-black uppercase tracking-[-0.045em] text-white sm:text-7xl md:text-8xl">
+        <h1 className="text-4xl font-black uppercase tracking-[-0.045em] text-white sm:text-6xl md:text-7xl">
           BIGBETBABA
         </h1>
 
         <button
           type="button"
           onClick={handleEnterClick}
-          className={`mt-11 rounded-xl bg-[#53FC18] px-10 py-5 text-base font-black tracking-wide text-[#07110d] transition duration-200 ease-out hover:-translate-y-1 hover:bg-emerald-300 active:translate-y-1 active:scale-[0.97] sm:px-12 sm:text-lg ${pressed ? "scale-[0.97]" : ""}`}
+          className={`group relative mt-8 cursor-pointer overflow-hidden rounded-[28px] border border-yellow-400/25 bg-gradient-to-b from-[#2a2f38] via-[#141922] to-[#0a0d12] px-3 py-3 shadow-[0_0_50px_rgba(0,0,0,.45)] transition duration-200 ease-out hover:-translate-y-1 hover:scale-[1.015] hover:shadow-[0_0_70px_rgba(83,252,24,.22)] active:translate-y-1 active:scale-[0.97] ${pressed ? "scale-[0.97]" : ""}`}
           style={{ animation: "buttonBreath 2s ease-in-out infinite" }}
         >
-          I’m over 18 — enter
+          <div
+            className="absolute inset-0 opacity-[0.08]"
+            style={{
+              backgroundImage: "linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent)",
+              backgroundSize: "180px 100%",
+            }}
+          />
+
+          <div className="relative flex items-center gap-3 rounded-[22px] border border-white/10 bg-[#050608] px-5 py-4 shadow-[inset_0_0_30px_rgba(0,0,0,.9)]">
+            {["💎", "💎", "💎"].map((symbol, index) => (
+              <div
+                key={index}
+                className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-b from-[#f8f8f8] via-[#d8d8d8] to-[#f1f1f1] text-3xl font-black text-[#07110d] shadow-[inset_0_8px_14px_rgba(255,255,255,.75),inset_0_-12px_18px_rgba(0,0,0,.22)]"
+              >
+                <div className="absolute inset-x-0 top-0 h-4 bg-gradient-to-b from-black/15 to-transparent" />
+                <div
+                  className="group-hover:[animation:hoverReelSpin_.85s_cubic-bezier(.17,.84,.25,1)_both]"
+                  style={{ animationDelay: `${index * 0.08}s` }}
+                >
+                  {symbol}
+                </div>
+              </div>
+            ))}
+
+            <div className="ml-5 text-left">
+              <div className="text-xs font-black uppercase tracking-[0.24em] text-[#53FC18] opacity-90">
+                Click to continue
+              </div>
+              <div className="mt-1 text-3xl font-black uppercase leading-none tracking-[-0.05em] text-white sm:text-5xl">
+                I’m 18+
+              </div>
+            </div>
+          </div>
         </button>
 
         <div className="mt-16 grid w-full max-w-5xl gap-4 md:grid-cols-3">
@@ -371,7 +412,7 @@ function LoadingScreen() {
             </div>
 
             <div className="mt-4 rounded-2xl border border-[#53FC18]/30 bg-[#53FC18]/10 px-6 py-3 text-center text-lg font-black tracking-[0.12em] text-[#53FC18] shadow-[0_0_24px_rgba(83,252,24,.12)]">
-              JACKPOT UNLOCKED
+              LOADING\.\.\.
             </div>
           </div>
 
@@ -517,7 +558,6 @@ function MainPage() {
       </nav>
 
       <section id="home" className="relative z-10 mx-auto max-w-7xl px-4 pb-8 pt-8 text-center sm:px-5 sm:pb-10 sm:pt-12">
-
         <div className="mx-auto mt-0 max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#0d121b]/90 text-left shadow-2xl shadow-black/40 md:translate-x-6">
           <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
             <div>
