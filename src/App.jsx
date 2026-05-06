@@ -160,13 +160,17 @@ function SEO() {
     const tags = [
       ["property", "og:title", "BIGBETBABA — Streams, Clips & Community"],
       ["property", "og:description", "Watch BIGBETBABA live, viral roulette wins and join the community."],
-      ["property", "og:image", "https://www.bigbetbaba.com/roulette-thumbnail.png"],
+      ["property", "og:image", "https://www.bigbetbaba.com/roulette-thumbnail.png?v=8"],
+      ["property", "og:image:width", "1200"],
+      ["property", "og:image:height", "630"],
       ["property", "og:url", "https://www.bigbetbaba.com/"],
+      ["property", "og:site_name", "BIGBETBABA"],
+      ["property", "og:locale", "en_US"],
       ["property", "og:type", "website"],
       ["name", "twitter:card", "summary_large_image"],
       ["name", "twitter:title", "BIGBETBABA"],
       ["name", "twitter:description", "Live casino streams, viral wins and community rewards."],
-      ["name", "twitter:image", "https://www.bigbetbaba.com/roulette-thumbnail.png"],
+      ["name", "twitter:image", "https://www.bigbetbaba.com/roulette-thumbnail.png?v=8"],
       ["name", "theme-color", "#53FC18"],
     ];
 
