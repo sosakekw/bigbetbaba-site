@@ -344,58 +344,75 @@ function LoadingScreen() {
 }
 
 function HighlightCard() {
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
-    <a
-      href={LINKS.clip}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative block overflow-hidden rounded-[28px] border border-white/10 bg-[#0d121b]/80 p-4 text-left shadow-2xl shadow-black/30 transition duration-300 hover:-translate-y-1 hover:border-[#53FC18]/40 hover:shadow-[0_0_45px_rgba(83,252,24,.12)]"
-    >
-      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black">
-        <img
-          src="/roulette-thumbnail.png"
-          alt="28k roulette win"
-          className="h-64 w-full object-cover transition duration-700 group-hover:scale-[1.06]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-black/20 bg-[#53FC18] px-4 py-2 shadow-xl shadow-black/40">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#07110d] opacity-40" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#07110d]" />
-          </span>
-          <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#07110d]">Viral clip</span>
-        </div>
-        <div className="absolute right-4 top-4 rounded-full border border-yellow-300/30 bg-black/70 px-4 py-2 text-sm font-black tracking-[0.12em] text-yellow-200 backdrop-blur-md shadow-xl shadow-black/40">
-          €28,080 WIN
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-[#53FC18] text-[#07110d] shadow-[0_0_40px_rgba(83,252,24,.35)] transition duration-300 group-hover:scale-110 group-hover:shadow-[0_0_70px_rgba(83,252,24,.55)]">
-            <svg viewBox="0 0 24 24" fill="currentColor" className="ml-1 h-9 w-9">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+    <div className="group relative block w-full overflow-hidden rounded-3xl border border-[#53FC18]/20 bg-[#0d121b]/90 p-4 text-left shadow-2xl shadow-black/30 transition duration-300 hover:border-[#53FC18]/45 hover:shadow-[0_0_55px_rgba(83,252,24,.18)]">
+      <div className="relative overflow-hidden rounded-2xl border border-[#53FC18]/20 bg-black shadow-[0_0_40px_rgba(83,252,24,.10)]">
+        {isPlaying ? (
+          <div className="relative aspect-video bg-black">
+            <iframe
+              title="BIGBETBABA roulette clip"
+              src={LINKS.clip}
+              className="absolute inset-0 h-full w-full border-0"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowFullScreen
+            />
           </div>
-        </div>
-        <div className="absolute inset-x-0 bottom-0 p-5">
-          <div className="max-w-[95%] text-5xl font-black uppercase leading-[0.92] tracking-[-0.06em] text-white drop-shadow-[0_6px_22px_rgba(0,0,0,.95)] md:text-6xl">
-            YOU WIN<br />€28,080
-          </div>
-          <div className="mt-3 flex items-center gap-2 text-sm font-semibold text-slate-200">
-            <span className="rounded-full bg-white/10 px-3 py-1 backdrop-blur-md">Slots & Casino</span>
-            <span className="rounded-full bg-white/10 px-3 py-1 backdrop-blur-md">BigBetBaba</span>
-          </div>
-        </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setIsPlaying(true)}
+            className="relative block w-full text-left"
+          >
+            <img
+              src="/roulette-thumbnail.png"
+              alt="28k roulette win"
+              className="h-64 w-full object-cover transition duration-700 group-hover:scale-[1.06]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
+            <div className="absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_50%,rgba(83,252,24,.26),transparent_42%)]" />
+
+            <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-black/20 bg-[#53FC18] px-4 py-2 shadow-xl shadow-black/40">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#07110d] opacity-40" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#07110d]" />
+              </span>
+              <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#07110d]">Viral clip</span>
+            </div>
+
+            <div className="absolute right-4 top-4 rounded-full border border-yellow-300/30 bg-black/70 px-4 py-2 text-sm font-black tracking-[0.12em] text-yellow-200 backdrop-blur-md shadow-xl shadow-black/40">
+              €28,080 WIN
+            </div>
+
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/25 bg-[#53FC18] text-[#07110d] shadow-[0_0_50px_rgba(83,252,24,.55)] transition duration-300 group-hover:scale-110 group-hover:shadow-[0_0_95px_rgba(83,252,24,.75)]">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="ml-1 h-9 w-9">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+
+            <div className="absolute inset-x-0 bottom-0 p-5">
+              <div className="max-w-[95%] text-5xl font-black uppercase leading-[0.92] tracking-[-0.06em] text-white drop-shadow-[0_6px_22px_rgba(0,0,0,.95)] md:text-6xl">
+                YOU WIN<br />€28,080
+              </div>
+              <div className="mt-3 flex items-center gap-2 text-sm font-semibold text-slate-200">
+                <span className="rounded-full bg-white/10 px-3 py-1 backdrop-blur-md">Slots & Casino</span>
+                <span className="rounded-full bg-white/10 px-3 py-1 backdrop-blur-md">BigBetBaba</span>
+              </div>
+            </div>
+          </button>
+        )}
       </div>
 
-      <div className="mt-4 flex items-center justify-between px-1">
-        <div>
-          <div className="text-sm font-black text-white">CRAZY roulette reaction</div>
-          <div className="mt-1 text-xs text-slate-500">Click to watch the full moment on Kick</div>
-        </div>
-        <div className="rounded-full bg-[#53FC18] px-5 py-3 text-sm font-black text-[#07110d] transition duration-300 group-hover:scale-105 group-hover:bg-emerald-300">
-          Watch
+      <div className="mt-4 px-1">
+        <div className="text-sm font-black text-white">CRAZY roulette reaction</div>
+        <div className="mt-1 text-xs text-slate-500">
+          {isPlaying ? "Playing here on the site" : "Click the thumbnail to play the clip here"}
         </div>
       </div>
-    </a>
+    </div>
   );
 }
 
@@ -499,7 +516,7 @@ function MainPage() {
           </div>
         </div>
 
-        <div className="mx-auto mt-8 max-w-5xl">
+        <div className="mx-auto mt-8 max-w-5xl md:translate-x-6">
           <HighlightCard />
         </div>
 
