@@ -37,7 +37,7 @@ function TestPanel() {
   const code = "BABA";
   const links = [
     "https://kick.com/bigbetbaba",
-    "https://discord.com/invite/leftlanepapi",
+    "https://discord.gg/XM92x385n",
     "https://www.youtube.com/@BIGBETBABA",
   ];
   const isSingleStaticLandingPage = true;
