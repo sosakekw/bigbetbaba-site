@@ -269,46 +269,72 @@ function LoadingScreen() {
       <button
         type="button"
         onClick={() => setSoundOn((value) => !value)}
-        className="absolute right-5 top-5 z-20 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-bold text-slate-300 transition hover:bg-white/[0.08]"
+        className="absolute right-5 top-5 z-30 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs font-bold text-slate-300 backdrop-blur-md transition hover:bg-white/[0.08]"
       >
         Sound {soundOn ? "on" : "off"}
       </button>
 
       <section className="relative z-10 flex min-h-screen items-center justify-center px-5">
         <div className="pointer-events-none absolute inset-0 bg-[#53FC18]" style={{ animation: "jackpotFlash 1.35s ease-in-out infinite" }} />
-        <div className="relative">
+
+        <div className="relative mx-auto w-full max-w-[560px]">
+          <div className="absolute -inset-6 rounded-[46px] bg-[radial-gradient(circle_at_50%_0%,rgba(83,252,24,.20),transparent_55%)] blur-2xl" />
+
           <div
-            className="rounded-[26px] border border-white/10 bg-[#10141d] p-5 shadow-2xl shadow-black/50"
+            className="relative overflow-hidden rounded-[34px] border border-yellow-500/20 bg-gradient-to-b from-[#2b2f37] via-[#111722] to-[#07090f] p-4 shadow-[0_30px_90px_rgba(0,0,0,.65),inset_0_1px_0_rgba(255,255,255,.18)]"
             style={{ animation: "machineSettle 1.8s ease-in-out infinite" }}
           >
-            <div className="mb-4 flex items-center justify-between px-1">
-              <span className="text-xs font-bold tracking-[0.12em] text-[#53FC18]">BigBetBaba</span>
-              <span className="rounded-full bg-[#53FC18]/10 px-3 py-1 text-xs font-bold text-[#53FC18]">Loading</span>
-            </div>
+            <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent" />
+            <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent)", backgroundSize: "180px 100%" }} />
 
-            <div className="flex gap-3 rounded-2xl border border-white/10 bg-[#070a11] p-4 shadow-inner shadow-black/60">
-              {["B", "A", "B", "A"].map((symbol, index) => (
-                <div key={`${symbol}-${index}`} className="relative flex h-28 w-20 items-center justify-center overflow-hidden rounded-xl bg-[#151b26] ring-1 ring-white/10">
-                  <div
-                    className="font-mono text-6xl font-black text-white"
-                    style={{ animation: `reelDrop .75s ${index * 0.12}s cubic-bezier(.2,.9,.25,1) both` }}
-                  >
-                    {symbol}
-                  </div>
+            <div className="rounded-[26px] border border-yellow-400/25 bg-gradient-to-b from-[#151b24] to-[#080b10] p-4 shadow-inner shadow-black/80">
+              <div className="mb-4 rounded-2xl border border-yellow-400/20 bg-black/45 px-5 py-3 text-center shadow-inner shadow-black/70">
+                <div className="text-[11px] font-black uppercase tracking-[0.32em] text-yellow-200/80">BigBetBaba Slots</div>
+                <div className="mt-1 text-2xl font-black tracking-[0.18em] text-[#53FC18] drop-shadow-[0_0_18px_rgba(83,252,24,.35)]">BABA</div>
+              </div>
+
+              <div className="relative rounded-[24px] border border-white/10 bg-[#030405] p-4 shadow-[inset_0_0_40px_rgba(0,0,0,.95)]">
+                <div className="pointer-events-none absolute inset-x-4 top-1/2 z-20 h-px bg-[#53FC18]/35 shadow-[0_0_14px_rgba(83,252,24,.7)]" />
+                <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-12 bg-gradient-to-b from-black/70 to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-12 bg-gradient-to-t from-black/70 to-transparent" />
+
+                <div className="grid grid-cols-4 gap-3">
+                  {["B", "A", "B", "A"].map((symbol, index) => (
+                    <div key={`${symbol}-${index}`} className="relative h-32 overflow-hidden rounded-xl border border-white/10 bg-gradient-to-b from-[#f8f8f8] via-[#d8d8d8] to-[#f2f2f2] shadow-[inset_0_10px_20px_rgba(255,255,255,.7),inset_0_-18px_25px_rgba(0,0,0,.25)]">
+                      <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/20 to-transparent" />
+                      <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/20 to-transparent" />
+                      <div
+                        className="flex h-full items-center justify-center font-serif text-6xl font-black text-[#0b1118] drop-shadow-[0_2px_0_rgba(255,255,255,.5)]"
+                        style={{ animation: `reelDrop .85s ${index * 0.16}s cubic-bezier(.17,.84,.25,1) both` }}
+                      >
+                        {symbol}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              <div className="mt-4 grid grid-cols-3 gap-3">
+                {["MAX BET", "BABA WIN", "SPINNING"].map((label) => (
+                  <div key={label} className="rounded-xl border border-white/10 bg-black/35 px-3 py-2 text-center text-[10px] font-black tracking-[0.14em] text-slate-300 shadow-inner shadow-black/50">
+                    {label}
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="mt-4 rounded-xl border border-[#53FC18]/20 bg-[#53FC18]/10 px-6 py-3 text-center text-lg font-black tracking-[0.08em] text-[#53FC18]">
-              BABA loaded
+            <div className="mt-4 rounded-2xl border border-[#53FC18]/30 bg-[#53FC18]/10 px-6 py-3 text-center text-lg font-black tracking-[0.12em] text-[#53FC18] shadow-[0_0_24px_rgba(83,252,24,.12)]">
+              JACKPOT UNLOCKED
             </div>
           </div>
 
-          <div className="absolute -right-12 top-16 hidden md:block">
-            <div className="h-16 w-8 rounded-r-xl border border-white/10 bg-[#151b26]" />
-            <div className="absolute left-4 top-2 origin-top" style={{ animation: "leverPull 1.1s ease-in-out infinite" }}>
-              <div className="h-24 w-2 rounded-full bg-slate-400" />
-              <div className="-ml-4 -mt-2 h-10 w-10 rounded-full bg-red-500 shadow-lg shadow-red-950/40" />
+          <div className="absolute -right-7 top-1/2 hidden -translate-y-1/2 md:block">
+            <div className="relative h-40 w-14 rounded-r-2xl border border-white/10 bg-gradient-to-b from-[#2a303a] to-[#0b0e14] shadow-xl shadow-black/40">
+              <div className="absolute left-3 top-7 h-24 w-4 rounded-full bg-black/50 shadow-inner shadow-black" />
+              <div className="absolute left-5 top-7 origin-top" style={{ animation: "leverPull 1.15s ease-in-out infinite" }}>
+                <div className="h-28 w-2 rounded-full bg-gradient-to-b from-slate-200 via-slate-500 to-slate-700 shadow-lg shadow-black/50" />
+                <div className="-ml-4 -mt-2 h-10 w-10 rounded-full border border-white/30 bg-gradient-to-br from-red-400 to-red-800 shadow-[0_0_24px_rgba(239,68,68,.45)]" />
+              </div>
             </div>
           </div>
         </div>
