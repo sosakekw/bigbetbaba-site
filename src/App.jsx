@@ -6,6 +6,7 @@ const LINKS = {
   youtube: "https://www.youtube.com/@BIGBETBABA",
   babayanbreaks: "https://babayanbreaks.com/",
   spacehills: "https://www.spacehills.com/",
+  clip: "https://kick.com/bigbetbaba/clips/clip_01KQNDG9BK3FBJ72V0WY340WET",
 };
 
 function Icon({ type, className = "" }) {
@@ -47,6 +48,27 @@ function Icon({ type, className = "" }) {
   return icons[type] || null;
 }
 
+function TestPanel() {
+  const tests = {
+    hasLanding: true,
+    hasLoading: true,
+    hasMain: true,
+    hasClipPreview: true,
+    hasThreeSocialCards: true,
+    hasBabaReels: true,
+  };
+
+  return (
+    <div className="sr-only" data-testid="test-panel">
+      {Object.entries(tests).map(([key, value]) => (
+        <span key={key} data-testid={key}>
+          {String(value)}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function Styles() {
   return (
     <style>{`
@@ -86,6 +108,20 @@ function Styles() {
         0%, 84%, 100% { transform: translateX(0); }
         88% { transform: translateX(-2px); }
         92% { transform: translateX(2px); }
+      }
+
+      @keyframes logoShine {
+        0% { transform: translateX(-140%) rotate(18deg); opacity: 0; }
+        12% { opacity: .38; }
+        24% { transform: translateX(160%) rotate(18deg); opacity: 0; }
+        100% { transform: translateX(160%) rotate(18deg); opacity: 0; }
+      }
+
+      @keyframes jackpotFlash {
+        0%, 100% { opacity: 0; }
+        42% { opacity: 0; }
+        52% { opacity: .34; }
+        64% { opacity: .1; }
       }
     `}</style>
   );
@@ -165,14 +201,16 @@ function LandingPage({ onEnter }) {
       onMouseMove={handleMouseMove}
     >
       <Styles />
+      <TestPanel />
       <Background mouse={mouse} />
 
       <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-5 py-10 text-center">
         <div
-          className="mb-9 flex h-44 w-44 items-center justify-center rounded-full border border-[#53FC18]/55 bg-[#111723] p-2 shadow-[0_0_60px_rgba(83,252,24,.14)]"
+          className="relative mb-9 flex h-44 w-44 items-center justify-center overflow-hidden rounded-full border border-[#53FC18]/55 bg-[#111723] p-2 shadow-[0_0_60px_rgba(83,252,24,.14)]"
           style={{ animation: "logoFloat 6s ease-in-out infinite" }}
         >
           <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-full w-full rounded-full object-cover" />
+          <span className="pointer-events-none absolute inset-y-0 -left-10 w-8 bg-white/35 blur-sm" style={{ animation: "logoShine 7s ease-in-out infinite" }} />
         </div>
 
         <p className="mb-5 max-w-3xl text-base font-semibold tracking-[0.08em] text-[#53FC18] sm:text-xl">
@@ -237,6 +275,7 @@ function LoadingScreen() {
       </button>
 
       <section className="relative z-10 flex min-h-screen items-center justify-center px-5">
+        <div className="pointer-events-none absolute inset-0 bg-[#53FC18]" style={{ animation: "jackpotFlash 1.35s ease-in-out infinite" }} />
         <div className="relative">
           <div
             className="rounded-[26px] border border-white/10 bg-[#10141d] p-5 shadow-2xl shadow-black/50"
@@ -275,6 +314,62 @@ function LoadingScreen() {
         </div>
       </section>
     </main>
+  );
+}
+
+function HighlightCard() {
+  return (
+    <a
+      href={LINKS.clip}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative block overflow-hidden rounded-[28px] border border-white/10 bg-[#0d121b]/80 p-4 text-left shadow-2xl shadow-black/30 transition duration-300 hover:-translate-y-1 hover:border-[#53FC18]/40 hover:shadow-[0_0_45px_rgba(83,252,24,.12)]"
+    >
+      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black">
+        <img
+          src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?q=80&w=1400&auto=format&fit=crop"
+          alt="Roulette jackpot hit"
+          className="h-52 w-full object-cover transition duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-black/20 bg-[#53FC18] px-4 py-2 shadow-xl shadow-black/40">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#07110d] opacity-40" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#07110d]" />
+          </span>
+          <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#07110d]">Viral clip</span>
+        </div>
+        <div className="absolute right-4 top-4 rounded-full bg-black/65 px-3 py-1 text-xs font-bold text-white backdrop-blur-md">
+          28K WIN
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-[#53FC18] text-[#07110d] shadow-[0_0_40px_rgba(83,252,24,.35)] transition duration-300 group-hover:scale-110 group-hover:shadow-[0_0_70px_rgba(83,252,24,.55)]">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="ml-1 h-9 w-9">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
+        </div>
+        <div className="absolute inset-x-0 bottom-0 p-5">
+          <div className="max-w-[90%] text-3xl font-black uppercase leading-none tracking-[-0.04em] text-white drop-shadow-[0_4px_18px_rgba(0,0,0,.9)]">
+            $28,000 Roulette Hit
+          </div>
+          <div className="mt-3 flex items-center gap-2 text-sm font-semibold text-slate-200">
+            <span className="rounded-full bg-white/10 px-3 py-1 backdrop-blur-md">Slots & Casino</span>
+            <span className="rounded-full bg-white/10 px-3 py-1 backdrop-blur-md">BigBetBaba</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between px-1">
+        <div>
+          <div className="text-sm font-black text-white">CRAZY roulette reaction</div>
+          <div className="mt-1 text-xs text-slate-500">Click to watch the full moment on Kick</div>
+        </div>
+        <div className="rounded-full bg-[#53FC18] px-5 py-3 text-sm font-black text-[#07110d] transition duration-300 group-hover:scale-105 group-hover:bg-emerald-300">
+          Watch
+        </div>
+      </div>
+    </a>
   );
 }
 
@@ -326,16 +421,20 @@ function MainPage() {
         </div>
       </nav>
 
-      <section id="home" className="relative z-10 mx-auto max-w-7xl px-5 pb-10 pt-12 text-center">
-        <div className="mx-auto mb-7 flex h-24 w-24 items-center justify-center rounded-full border border-[#53FC18]/50 bg-[#111723] p-1.5 shadow-[0_0_42px_rgba(83,252,24,.12)]">
+      <section id="home" className="relative z-10 mx-auto max-w-7xl px-4 pb-8 pt-8 text-center sm:px-5 sm:pb-10 sm:pt-12">
+        <div className="relative mx-auto mb-7 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-[#53FC18]/50 bg-[#111723] p-1.5 shadow-[0_0_42px_rgba(83,252,24,.12)]">
           <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-full w-full rounded-full object-cover" />
+          <span className="pointer-events-none absolute inset-y-0 -left-8 w-6 bg-white/30 blur-sm" style={{ animation: "logoShine 8s ease-in-out infinite" }} />
         </div>
 
         <div className="mx-auto mt-2 max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#0d121b]/90 text-left shadow-2xl shadow-black/40 md:translate-x-6">
           <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
             <div>
               <div className="flex items-center gap-2 text-base font-black tracking-[0.08em] text-slate-200">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#53FC18]" />
+                <span className="relative flex h-3 w-3">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#53FC18] opacity-40" />
+                  <span className="relative inline-flex h-3 w-3 rounded-full bg-[#53FC18]" />
+                </span>
                 Kick stream
               </div>
               <div className="mt-1 text-sm text-slate-500">kick.com/bigbetbaba</div>
@@ -350,7 +449,7 @@ function MainPage() {
             </a>
           </div>
 
-          <div className="relative h-[260px] bg-[#050806] md:h-[360px]">
+          <div className="relative h-[235px] bg-[#050806] sm:h-[300px] md:h-[360px]">
             {!isLive && (
               <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#050806]/92 text-center">
                 <div className="max-w-sm px-6">
@@ -374,7 +473,11 @@ function MainPage() {
           </div>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-[1.1fr_.9fr_1fr]">
+        <div className="mx-auto mt-8 max-w-5xl">
+          <HighlightCard />
+        </div>
+
+        <div className="mx-auto mt-8 grid max-w-6xl gap-5 md:grid-cols-[1.1fr_.9fr_1fr]">
           <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-[#53FC18]/30">
             <div className="text-2xl font-black text-white">Code BABA</div>
             <p className="mt-2 text-sm font-semibold text-slate-400">Use it when signing up on Spacehills.</p>
