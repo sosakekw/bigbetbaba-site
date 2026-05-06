@@ -109,9 +109,48 @@ function PageBackground() {
 }
 
 function LandingPage({ onEnter }) {
+  const [mouse, setMouse] = useState({ x: 50, y: 50 });
+  const [pressed, setPressed] = useState(false);
+
+  function handleMouseMove(event) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setMouse({
+      x: ((event.clientX - rect.left) / rect.width) * 100,
+      y: ((event.clientY - rect.top) / rect.height) * 100,
+    });
+  }
+
+  function handleEnterClick() {
+    setPressed(true);
+    window.setTimeout(() => {
+      onEnter();
+    }, 180);
+  }
+
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
+    <main
+      className={`relative min-h-screen overflow-hidden bg-[#070a11] text-white ${pressed ? "animate-[enterShake_.18s_ease-in-out]" : ""}`}
+      onMouseMove={handleMouseMove}
+    >
+      <style>{`
+        @keyframes enterShake {
+          0%, 100% { transform: translateX(0); }
+          30% { transform: translateX(-4px); }
+          60% { transform: translateX(4px); }
+        }
+
+        @keyframes buttonPulse {
+          0%, 100% { box-shadow: 0 0 28px rgba(31,217,132,.22); }
+          50% { box-shadow: 0 0 54px rgba(31,217,132,.48); }
+        }
+      `}</style>
       <PageBackground />
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(31,217,132,.18), rgba(31,217,132,.07) 16%, transparent 34%)`,
+        }}
+      />
 
       <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-5 py-10 text-center">
         <div className="mb-10 flex h-44 w-44 items-center justify-center rounded-full border-[3px] border-emerald-400/70 bg-[#111723] p-2 shadow-[0_0_90px_rgba(31,217,132,.20)]" style={{ animation: 'logoDrift 5.5s ease-in-out infinite' }}>
@@ -128,8 +167,9 @@ function LandingPage({ onEnter }) {
 
         <button
           type="button"
-          onClick={onEnter}
-          className="mt-12 rounded-lg bg-emerald-400 px-12 py-5 text-lg font-black tracking-wide text-[#07110d] shadow-[0_0_28px_rgba(31,217,132,.20)] transition hover:bg-emerald-300"
+          onClick={handleEnterClick}
+          className={`mt-12 rounded-lg bg-emerald-400 px-12 py-5 text-lg font-black tracking-wide text-[#07110d] shadow-[0_0_28px_rgba(31,217,132,.20)] transition duration-200 ease-out hover:-translate-y-1 hover:bg-emerald-300 active:translate-y-1 active:scale-[0.97] ${pressed ? "scale-[0.97]" : ""}`}
+          style={{ animation: 'buttonPulse 1.8s ease-in-out infinite' }}
         >
           I’m over 18 — enter
         </button>
