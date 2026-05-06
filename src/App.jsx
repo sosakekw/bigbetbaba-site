@@ -291,9 +291,9 @@ function MainPage() {
         <div className="mx-auto mt-2 max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#0d121b]/90 text-left shadow-2xl shadow-black/40 md:translate-x-8">
           <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
             <div>
-              <div className="flex items-center gap-2 text-base font-black tracking-[0.12em] text-emerald-300">
-                <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
-                BigBetBaba live
+              <div className="flex items-center gap-2 text-base font-black tracking-[0.12em] text-slate-200">
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
+                BigBetBaba offline
               </div>
               <div className="mt-1 text-sm text-slate-500">kick.com/bigbetbaba</div>
             </div>
