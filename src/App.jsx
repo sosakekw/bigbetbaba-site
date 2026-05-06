@@ -254,10 +254,10 @@ function MainPage() {
             </a>
           </div>
 
-          <div className="relative aspect-\[16/7\] bg-[#050806] max-h-\[520px\]">
+          <div className="relative h-[320px] bg-[#050806] md:h-[440px]">
             <iframe
               title="BIGBETBABA Kick live player"
-              src="https://kick.com/bigbetbaba"
+              src="https://player.kick.com/bigbetbaba"
               className="absolute inset-0 h-full w-full border-0"
               loading="lazy"
               allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
@@ -287,7 +287,7 @@ function MainPage() {
       </section>
 
       <section id="babayanbreaks" className="relative z-10 mx-auto max-w-7xl px-5 pb-20">
-        <h2 className="mb-6 text-4xl font-black uppercase tracking-[-0.03em] text-white sm:text-5xl">Babayanbreaks</h2>
+        
 
         <div className="grid gap-5 md:grid-cols-3">
           <a href="https://babayanbreaks.com/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-emerald-400/20 bg-[#101620]/80 p-7 transition hover:-translate-y-1 hover:border-emerald-400/50">
