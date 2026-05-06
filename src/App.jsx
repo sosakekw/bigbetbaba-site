@@ -353,9 +353,9 @@ function HighlightCard() {
     >
       <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black">
         <img
-          src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?q=80&w=1400&auto=format&fit=crop"
-          alt="Roulette jackpot hit"
-          className="h-52 w-full object-cover transition duration-700 group-hover:scale-110"
+          src="/roulette-thumbnail.png"
+          alt="28k roulette win"
+          className="h-64 w-full object-cover transition duration-700 group-hover:scale-[1.06]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
         <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-black/20 bg-[#53FC18] px-4 py-2 shadow-xl shadow-black/40">
@@ -365,8 +365,8 @@ function HighlightCard() {
           </span>
           <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#07110d]">Viral clip</span>
         </div>
-        <div className="absolute right-4 top-4 rounded-full bg-black/65 px-3 py-1 text-xs font-bold text-white backdrop-blur-md">
-          28K WIN
+        <div className="absolute right-4 top-4 rounded-full border border-yellow-300/30 bg-black/70 px-4 py-2 text-sm font-black tracking-[0.12em] text-yellow-200 backdrop-blur-md shadow-xl shadow-black/40">
+          €28,080 WIN
         </div>
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-[#53FC18] text-[#07110d] shadow-[0_0_40px_rgba(83,252,24,.35)] transition duration-300 group-hover:scale-110 group-hover:shadow-[0_0_70px_rgba(83,252,24,.55)]">
@@ -376,8 +376,8 @@ function HighlightCard() {
           </div>
         </div>
         <div className="absolute inset-x-0 bottom-0 p-5">
-          <div className="max-w-[90%] text-3xl font-black uppercase leading-none tracking-[-0.04em] text-white drop-shadow-[0_4px_18px_rgba(0,0,0,.9)]">
-            $28,000 Roulette Hit
+          <div className="max-w-[95%] text-5xl font-black uppercase leading-[0.92] tracking-[-0.06em] text-white drop-shadow-[0_6px_22px_rgba(0,0,0,.95)] md:text-6xl">
+            YOU WIN<br />€28,080
           </div>
           <div className="mt-3 flex items-center gap-2 text-sm font-semibold text-slate-200">
             <span className="rounded-full bg-white/10 px-3 py-1 backdrop-blur-md">Slots & Casino</span>
