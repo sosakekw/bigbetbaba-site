@@ -43,6 +43,11 @@ function Icon({ type, className = "" }) {
         <path d="M12 7v5l3 2" />
       </svg>
     ),
+    spark: (
+      <svg {...common}>
+        <path d="M12 2 9.8 8.8 3 11l6.8 2.2L12 20l2.2-6.8L21 11l-6.8-2.2L12 2Z" />
+      </svg>
+    ),
   };
 
   return icons[type] || null;
@@ -122,6 +127,16 @@ function Styles() {
         42% { opacity: 0; }
         52% { opacity: .34; }
         64% { opacity: .1; }
+      }
+
+      @keyframes countPulse {
+        0%, 100% { opacity: .88; transform: translateY(0); }
+        50% { opacity: 1; transform: translateY(-1px); }
+      }
+
+      @keyframes softParallax {
+        0%, 100% { transform: translate3d(0,0,0); }
+        50% { transform: translate3d(0,-6px,0); }
       }
     `}</style>
   );
@@ -418,6 +433,15 @@ function HighlightCard() {
 
 function MainPage() {
   const isLive = false;
+  const [viewerCount, setViewerCount] = useState(1847);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setViewerCount((count) => count + (Math.random() > 0.5 ? 7 : -4));
+    }, 2600);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
     <main className="relative min-h-screen overflow-hidden text-white">
@@ -480,7 +504,14 @@ function MainPage() {
                 </span>
                 Kick stream
               </div>
-              <div className="mt-1 text-sm text-slate-500">kick.com/bigbetbaba</div>
+              <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-slate-500">
+                <span>kick.com/bigbetbaba</span>
+                <span className="hidden h-1 w-1 rounded-full bg-slate-700 sm:inline-flex" />
+                <span className="inline-flex items-center gap-1 text-[#53FC18]" style={{ animation: "countPulse 2.4s ease-in-out infinite" }}>
+                  <Icon type="spark" className="h-3.5 w-3.5" />
+                  {viewerCount.toLocaleString()} community views
+                </span>
+              </div>
             </div>
             <a
               href={LINKS.kick}
@@ -494,11 +525,13 @@ function MainPage() {
 
           <div className="relative h-[235px] bg-[#050806] sm:h-[300px] md:h-[360px]">
             {!isLive && (
-              <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#050806]/92 text-center">
-                <div className="max-w-sm px-6">
+              <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden bg-[#050806]/92 text-center">
+                <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "url('/roulette-thumbnail.png')", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(18px)", transform: "scale(1.08)" }} />
+                <div className="absolute inset-0 bg-black/65" />
+                <div className="relative max-w-sm px-6">
                   <img src="/logo.jpg" alt="BIGBETBABA logo" className="mx-auto h-20 w-20 rounded-full object-cover ring-2 ring-[#53FC18]/35" />
                   <div className="mt-5 text-xl font-black text-white">Stream offline</div>
-                  <div className="mt-2 text-sm leading-6 text-slate-400">BigBetBaba is not live right now. Open Kick or check back later.</div>
+                  <div className="mt-2 text-sm leading-6 text-slate-400">BigBetBaba is not live right now. Watch the latest €28K clip below or open Kick.</div>
                 </div>
               </div>
             )}
@@ -516,8 +549,25 @@ function MainPage() {
           </div>
         </div>
 
-        <div className="mx-auto mt-8 max-w-5xl md:translate-x-6">
+        <div className="mx-auto mt-8 grid max-w-5xl gap-5 md:translate-x-6 md:grid-cols-[1.35fr_.65fr]">
           <HighlightCard />
+
+          <div className="grid gap-5">
+            <div className="rounded-3xl border border-white/10 bg-[#0d121b]/80 p-6 text-left shadow-xl shadow-black/20" style={{ animation: "softParallax 6s ease-in-out infinite" }}>
+              <div className="text-xs font-bold uppercase tracking-[0.14em] text-[#53FC18]">Last big hit</div>
+              <div className="mt-3 text-4xl font-black tracking-[-0.05em] text-white">€28,080</div>
+              <div className="mt-2 text-sm leading-6 text-slate-400">Roulette clip from the latest stream highlight.</div>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-[#0d121b]/80 p-6 text-left shadow-xl shadow-black/20">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[#53FC18]">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-[#53FC18]" />
+                Active daily
+              </div>
+              <div className="mt-3 text-2xl font-black text-white">Discord + Kick</div>
+              <div className="mt-2 text-sm leading-6 text-slate-400">Join for drops, stream alerts and community updates.</div>
+            </div>
+          </div>
         </div>
 
         <div className="mx-auto mt-8 grid max-w-6xl gap-5 md:grid-cols-[1.1fr_.9fr_1fr]">
