@@ -248,8 +248,8 @@ function LoadingScreen() {
   const [soundOn, setSoundOn] = useState(true);
 
   useEffect(() => {
-    const audio = new Audio("/jackpot.mp3");
-    audio.volume = 0.22;
+    const audio = new Audio("/jackpot.mp3?v=2");
+    audio.volume = 0.35;
 
     if (soundOn) {
       audio.play().catch(() => {});
@@ -560,7 +560,7 @@ export default function App() {
 
   function handleEnter() {
     setScreen("loading");
-    const delay = 1200 + Math.floor(Math.random() * 900);
+    const delay = 4200;
     window.setTimeout(() => {
       setScreen("main");
     }, delay);
