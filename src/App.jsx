@@ -765,8 +765,6 @@ function SEO() {
 export default function App() {
   const [screen, setScreen] = useState("landing");
 
-  <SEO />
-
   function handleEnter() {
     setScreen("loading");
     const delay = 4200;
@@ -775,7 +773,17 @@ export default function App() {
     }, delay);
   }
 
-  if (screen === "loading") return <LoadingScreen />;
-  if (screen === "main") return <MainPage />;
-  return <LandingPage onEnter={handleEnter} />;
+  return (
+    <>
+      <SEO />
+
+      {screen === "loading" ? (
+        <LoadingScreen />
+      ) : screen === "main" ? (
+        <MainPage />
+      ) : (
+        <LandingPage onEnter={handleEnter} />
+      )}
+    </>
+  );
 }
