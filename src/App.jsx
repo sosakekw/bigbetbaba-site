@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Icon({ type, className = "" }) {
   const common = {
@@ -34,6 +34,17 @@ function Icon({ type, className = "" }) {
         <path d="M7 7h10v10" />
       </svg>
     ),
+    clock: (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </svg>
+    ),
+    spark: (
+      <svg {...common}>
+        <path d="M12 2 9.7 8.7 3 11l6.7 2.3L12 20l2.3-6.7L21 11l-6.7-2.3L12 2z" />
+      </svg>
+    ),
   };
 
   return icons[type] || null;
@@ -61,6 +72,29 @@ function SocialCard({ href, icon, label, action, colorClass }) {
 function PageBackground() {
   return (
     <>
+      <style>{`
+        @keyframes ambientFloat {
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .55; }
+          50% { transform: translate3d(18px, -16px, 0) scale(1.08); opacity: .8; }
+        }
+
+        @keyframes cardBreathe {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
+        }
+
+        @keyframes tickerMove {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        @keyframes logoDrift {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-6px) rotate(.5deg); }
+        }
+      `}</style>
+      <div className="pointer-events-none absolute left-1/2 top-20 h-72 w-72 -translate-x-1/2 rounded-full bg-emerald-400/10 blur-3xl" style={{ animation: 'ambientFloat 7s ease-in-out infinite' }} />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.045] mix-blend-screen" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"n\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.85\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23n)\" opacity=\"0.8\"/%3E%3C/svg%3E")' }} />
       <div
         className="absolute inset-0 opacity-20"
         style={{
@@ -80,7 +114,7 @@ function LandingPage({ onEnter }) {
       <PageBackground />
 
       <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-5 py-10 text-center">
-        <div className="mb-10 flex h-44 w-44 items-center justify-center rounded-full border-[3px] border-emerald-400/70 bg-[#111723] p-2 shadow-[0_0_90px_rgba(31,217,132,.20)]">
+        <div className="mb-10 flex h-44 w-44 items-center justify-center rounded-full border-[3px] border-emerald-400/70 bg-[#111723] p-2 shadow-[0_0_90px_rgba(31,217,132,.20)]" style={{ animation: 'logoDrift 5.5s ease-in-out infinite' }}>
           <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-full w-full rounded-full object-cover" />
         </div>
 
@@ -115,6 +149,17 @@ function LandingPage({ onEnter }) {
 }
 
 function LoadingScreen() {
+  useEffect(() => {
+    const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3');
+    audio.volume = 0.28;
+    audio.play().catch(() => {});
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, []);
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#06080d] text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(34,197,94,.14),transparent_34%),linear-gradient(180deg,#080b12_0%,#05070c_100%)]" />
@@ -132,14 +177,21 @@ function LoadingScreen() {
         }
 
         @keyframes softGlow {
-          0%, 100% { box-shadow: 0 0 24px rgba(34,197,94,.18); }
-          50% { box-shadow: 0 0 42px rgba(34,197,94,.34); }
+          0%, 100% { box-shadow: 0 0 20px rgba(34,197,94,.14); }
+          50% { box-shadow: 0 0 34px rgba(34,197,94,.28); }
+        }
+
+        @keyframes machineSettle {
+          0%, 82%, 100% { transform: translateX(0); }
+          86% { transform: translateX(-3px); }
+          90% { transform: translateX(3px); }
+          94% { transform: translateX(-2px); }
         }
       `}</style>
 
       <section className="relative z-10 flex min-h-screen items-center justify-center px-5">
         <div className="relative">
-          <div className="rounded-[28px] border border-white/10 bg-[#10141d] p-5 shadow-2xl shadow-black/50" style={{ animation: 'softGlow 1.4s ease-in-out infinite' }}>
+          <div className="rounded-[28px] border border-white/10 bg-[#10141d] p-5 shadow-2xl shadow-black/50" style={{ animation: 'softGlow 1.4s ease-in-out infinite, machineSettle 1.8s ease-in-out infinite' }}>
             <div className="mb-4 flex items-center justify-between px-2">
               <span className="text-xs font-semibold tracking-[0.18em] text-emerald-300">BigBetBaba</span>
               <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">Getting ready</span>
@@ -177,6 +229,14 @@ function LoadingScreen() {
 }
 
 function MainPage() {
+  const activity = [
+    'Kick stream ready',
+    'Discord community open',
+    'Code BABA active',
+    'New clips on YouTube',
+    'Babayanbreaks link live',
+  ];
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
       <PageBackground />
@@ -186,8 +246,8 @@ function MainPage() {
           <div className="flex items-center gap-3">
             <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-12 w-12 rounded-full object-cover ring-2 ring-emerald-400/60" />
             <div>
-              <div className="text-lg font-black tracking-wide">BIGBETBABA</div>
-              <div className="text-xs font-bold tracking-[0.16em] text-emerald-300">Live community</div>
+              <div className="text-lg font-black tracking-normal text-white antialiased">BIGBETBABA</div>
+              <div className="text-xs font-bold tracking-[0.08em] text-emerald-300 antialiased">Live community</div>
             </div>
           </div>
 
@@ -204,7 +264,7 @@ function MainPage() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className={`rounded-lg px-4 py-3 text-xs font-black tracking-[0.12em] transition hover:bg-white/10 ${index === 0 ? "bg-emerald-400/10 text-emerald-300 ring-1 ring-emerald-400/20" : "text-slate-300"}`}
+                className={`rounded-lg px-5 py-3 text-sm font-extrabold tracking-normal antialiased transition hover:bg-white/10 ${index === 0 ? "bg-emerald-400/10 text-emerald-300 ring-1 ring-emerald-400/20" : "text-slate-200 hover:text-white"}`}
               >
                 {label}
               </a>
@@ -222,12 +282,13 @@ function MainPage() {
         </div>
       </nav>
 
-      <section id="home" className="relative z-10 mx-auto max-w-7xl px-5 pb-12 pt-16 text-center">
+      <section id="home" className="relative z-10 mx-auto max-w-7xl px-5 pb-10 pt-12 text-center">
+        
         <div className="mx-auto mb-7 flex h-24 w-24 items-center justify-center rounded-full border-2 border-emerald-400/60 bg-[#111723] p-1.5 shadow-[0_0_60px_rgba(31,217,132,.18)]">
           <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-full w-full rounded-full object-cover" />
         </div>
 
-        <div className="mx-auto mt-2 max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-[#0d121b]/90 text-left shadow-2xl shadow-black/40">
+        <div className="mx-auto mt-2 max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#0d121b]/90 text-left shadow-2xl shadow-black/40 md:translate-x-8">
           <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
             <div>
               <div className="flex items-center gap-2 text-base font-black tracking-[0.12em] text-emerald-300">
@@ -246,7 +307,7 @@ function MainPage() {
             </a>
           </div>
 
-          <div className="relative h-[300px] bg-[#050806] md:h-[400px]">
+          <div className="relative h-[280px] bg-[#050806] md:h-[380px]">
             <div className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(circle_at_center,rgba(34,197,94,.08),transparent_45%)] text-center">
               <div>
                 <div className="text-lg font-black text-white">Stream preview</div>
@@ -264,16 +325,16 @@ function MainPage() {
           </div>
         </div>
 
-        <div className="mx-auto mt-10 grid max-w-6xl gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20">
+        <div className="mx-auto mt-10 grid max-w-6xl gap-4 md:grid-cols-[1.1fr_.9fr_1fr]">
+          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/30">
             <div className="text-3xl font-black text-white">Code BABA</div>
             <p className="mt-2 text-sm font-semibold text-slate-400">Use it when signing up on Spacehills.</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20">
+          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/30">
             <div className="text-3xl font-black text-white">Kick stream</div>
             <p className="mt-2 text-sm font-semibold text-slate-400">Catch live sessions and stream moments.</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20">
+          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/30">
             <div className="text-3xl font-black text-white">Discord</div>
             <p className="mt-2 text-sm font-semibold text-slate-400">Get updates, drops and community posts.</p>
           </div>
@@ -289,6 +350,10 @@ function MainPage() {
           <div>
             <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">Community links</h2>
             <p className="mt-2 text-sm text-slate-500">Fast access to the places people actually use.</p>
+          </div>
+          <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-[#0d121b]/80 px-4 py-2 text-sm font-bold text-slate-300 md:flex">
+            <Icon type="clock" className="h-4 w-4 text-emerald-300" />
+            Most nights • 8PM CET
           </div>
         </div>
 
@@ -318,6 +383,26 @@ function MainPage() {
           </a>
         </div>
       </section>
+
+      <footer className="relative z-10 border-t border-white/10 px-5 py-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 text-center md:flex-row md:text-left">
+          <div>
+            <div className="text-lg font-black text-white">BIGBETBABA</div>
+            <div className="mt-1 text-xs text-slate-500">18+ community links, streams and updates.</div>
+          </div>
+          <div className="flex items-center gap-3">
+            <a href="https://kick.com/bigbetbaba" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 p-3 text-slate-300 transition hover:border-emerald-400/40 hover:text-emerald-300"><Icon type="kick" className="h-5 w-5" /></a>
+            <a href="https://discord.gg/XM92x385n" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 p-3 text-slate-300 transition hover:border-emerald-400/40 hover:text-emerald-300"><Icon type="discord" className="h-5 w-5" /></a>
+            <a href="https://www.youtube.com/@BIGBETBABA" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 p-3 text-slate-300 transition hover:border-emerald-400/40 hover:text-emerald-300"><Icon type="youtube" className="h-5 w-5" /></a>
+          </div>
+          <div className="text-xs uppercase tracking-[0.16em] text-slate-600">© 2026 • Play responsibly</div>
+        </div>
+      </footer>
+
+      <div className="fixed inset-x-4 bottom-4 z-30 grid grid-cols-2 gap-3 md:hidden">
+        <a href="https://kick.com/bigbetbaba" target="_blank" rel="noopener noreferrer" className="rounded-xl bg-[#53FC18] px-4 py-3 text-center text-sm font-black text-[#07110d] shadow-xl shadow-black/30">Watch Live</a>
+        <a href="https://discord.gg/XM92x385n" target="_blank" rel="noopener noreferrer" className="rounded-xl bg-white px-4 py-3 text-center text-sm font-black text-[#07110d] shadow-xl shadow-black/30">Join Discord</a>
+      </div>
     </main>
   );
 }
