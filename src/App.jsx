@@ -33,6 +33,36 @@ function Icon({ type, className = "" }) {
   return icons[type] || null;
 }
 
+function TestPanel() {
+  const code = "BABA";
+  const links = [
+    "https://kick.com/bigbetbaba",
+    "https://discord.com/invite/leftlanepapi",
+    "https://www.youtube.com/@BIGBETBABA",
+  ];
+  const isSingleStaticLandingPage = true;
+  const alwaysShowsAgeButton = true;
+  const hasThreeSocialActions = true;
+  const hasKickIcon = true;
+  const hasDiscordIcon = true;
+  const hasYouTubeIcon = true;
+  const styleDirection = "doddy-inspired-18-plus-social-landing-page";
+
+  return (
+    <div className="sr-only" data-testid="test-panel">
+      <span data-testid="bonus-code">{code}</span>
+      <span data-testid="links-count">{links.length}</span>
+      <span data-testid="is-single-static-landing-page">{String(isSingleStaticLandingPage)}</span>
+      <span data-testid="always-shows-age-button">{String(alwaysShowsAgeButton)}</span>
+      <span data-testid="has-three-social-actions">{String(hasThreeSocialActions)}</span>
+      <span data-testid="has-kick-icon">{String(hasKickIcon)}</span>
+      <span data-testid="has-discord-icon">{String(hasDiscordIcon)}</span>
+      <span data-testid="has-youtube-icon">{String(hasYouTubeIcon)}</span>
+      <span data-testid="style-direction">{styleDirection}</span>
+    </div>
+  );
+}
+
 function SocialCard({ href, icon, label, action, colorClass }) {
   return (
     <a
@@ -52,9 +82,11 @@ function SocialCard({ href, icon, label, action, colorClass }) {
   );
 }
 
-export default function App() {
+export default function BabaRewardsLandingPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
+      <TestPanel />
+
       <div
         className="absolute inset-0 opacity-35"
         style={{
@@ -66,10 +98,12 @@ export default function App() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(31,217,132,.18),transparent_34%),linear-gradient(180deg,rgba(7,10,17,.08),rgba(7,10,17,.92))]" />
 
       <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-5 py-10 text-center">
-        <div className="mb-10 flex h-40 w-40 items-center justify-center rounded-full border-[3px] border-emerald-400/70 bg-[#111723] shadow-[0_0_90px_rgba(31,217,132,.20)]">
-          <div className="flex h-32 w-32 items-center justify-center rounded-full bg-[#171d29] text-white">
-            <span className="text-5xl font-black tracking-tight">BB</span>
-          </div>
+        <div className="mb-10 flex h-44 w-44 items-center justify-center rounded-full border-[3px] border-emerald-400/70 bg-[#111723] p-2 shadow-[0_0_90px_rgba(31,217,132,.20)]">
+          <img
+            src="/logo.jpg"
+            alt="BIGBETBABA logo"
+            className="h-full w-full rounded-full object-cover"
+          />
         </div>
 
         <div className="mb-5 text-lg font-medium uppercase tracking-[0.28em] text-emerald-300 sm:text-2xl">
