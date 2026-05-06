@@ -149,10 +149,15 @@ function LandingPage({ onEnter }) {
 }
 
 function LoadingScreen() {
+  const [soundOn, setSoundOn] = useState(true);
+
   useEffect(() => {
     const audio = new Audio('/jackpot.mp3');
-    audio.volume = 0.28;
-    audio.play().catch(() => {});
+    audio.volume = 0.24;
+
+    if (soundOn) {
+      audio.play().catch(() => {});
+    }
 
     return () => {
       audio.pause();
@@ -190,6 +195,13 @@ function LoadingScreen() {
       `}</style>
 
       <section className="relative z-10 flex min-h-screen items-center justify-center px-5">
+        <button
+          type="button"
+          onClick={() => setSoundOn((value) => !value)}
+          className="absolute right-5 top-5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-bold text-slate-300 transition hover:bg-white/[0.08]"
+        >
+          Sound {soundOn ? 'on' : 'off'}
+        </button>
         <div className="relative">
           <div className="rounded-[28px] border border-white/10 bg-[#10141d] p-5 shadow-2xl shadow-black/50" style={{ animation: 'softGlow 1.4s ease-in-out infinite, machineSettle 1.8s ease-in-out infinite' }}>
             <div className="mb-4 flex items-center justify-between px-2">
@@ -229,6 +241,8 @@ function LoadingScreen() {
 }
 
 function MainPage() {
+  const isLive = false;
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
       <PageBackground />
@@ -236,7 +250,7 @@ function MainPage() {
       <nav className="relative z-10 border-b border-white/10 bg-[#080b12]/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
           <div className="flex items-center gap-3">
-            <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-12 w-12 rounded-full object-cover ring-2 ring-emerald-400/60" />
+            <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-14 w-14 rounded-full object-cover ring-2 ring-emerald-400/60" />
             <div>
               <div className="text-lg font-black tracking-normal text-white antialiased">BIGBETBABA</div>
               <div className="text-xs font-bold tracking-[0.08em] text-emerald-300 antialiased">Live community</div>
@@ -299,35 +313,40 @@ function MainPage() {
             </a>
           </div>
 
-          <div className="relative h-[280px] bg-[#050806] md:h-[380px]">
-            <div className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(circle_at_center,rgba(34,197,94,.08),transparent_45%)] text-center">
-              <div>
-                <div className="text-lg font-black text-white">Stream preview</div>
-                <div className="mt-2 text-sm text-slate-500">If the player is blocked, use the Watch live button.</div>
+          <div className="relative h-[260px] bg-[#050806] md:h-[360px]">
+            {!isLive && (
+              <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#050806]/90 text-center">
+                <div className="max-w-sm px-6">
+                  <img src="/logo.jpg" alt="BIGBETBABA logo" className="mx-auto h-20 w-20 rounded-full object-cover ring-2 ring-emerald-400/40" />
+                  <div className="mt-5 text-xl font-black text-white">Stream offline</div>
+                  <div className="mt-2 text-sm leading-6 text-slate-400">BigBetBaba is not live right now. Use the button above to open Kick or check back later.</div>
+                </div>
               </div>
-            </div>
-            <iframe
-              title="BIGBETBABA Kick live player"
+            )}
+            {isLive && (
+              <iframe
+                title="BIGBETBABA Kick live player"
               src="https://player.kick.com/bigbetbaba"
               className="absolute inset-0 h-full w-full border-0"
               loading="lazy"
               allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
               allowFullScreen
-            />
+              />
+            )}
           </div>
         </div>
 
-        <div className="mx-auto mt-10 grid max-w-6xl gap-4 md:grid-cols-[1.1fr_.9fr_1fr]">
-          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/30">
-            <div className="text-3xl font-black text-white">Code BABA</div>
+        <div className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-[1.1fr_.9fr_1fr]">
+          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-emerald-400/30">
+            <div className="text-2xl font-black text-white">Code BABA</div>
             <p className="mt-2 text-sm font-semibold text-slate-400">Use it when signing up on Spacehills.</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/30">
-            <div className="text-3xl font-black text-white">Kick stream</div>
+          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-emerald-400/30">
+            <div className="text-2xl font-black text-white">Kick stream</div>
             <p className="mt-2 text-sm font-semibold text-slate-400">Catch live sessions and stream moments.</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/30">
-            <div className="text-3xl font-black text-white">Discord</div>
+          <div className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-6 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-emerald-400/30">
+            <div className="text-2xl font-black text-white">Discord</div>
             <p className="mt-2 text-sm font-semibold text-slate-400">Get updates, drops and community posts.</p>
           </div>
         </div>
@@ -350,7 +369,7 @@ function MainPage() {
         </div>
 
         <div className="grid gap-5 md:grid-cols-3">
-          <a href="https://babayanbreaks.com/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/35">
+          <a href="https://babayanbreaks.com/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-emerald-400/35">
             <div className="mb-5 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-white p-2">
               <img
                 src="/babayanbreaks.png"
@@ -362,13 +381,13 @@ function MainPage() {
             <p className="mt-3 leading-7 text-slate-400">Visit Babayanbreaks for live breaks, collectibles and community events.</p>
           </a>
 
-          <a href="https://kick.com/bigbetbaba" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/35">
+          <a href="https://kick.com/bigbetbaba" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-emerald-400/35">
             <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#53FC18] text-[#07110d]"><Icon type="kick" className="h-9 w-9" /></div>
             <h3 className="text-2xl font-black text-white">Watch live</h3>
             <p className="mt-3 leading-7 text-slate-400">Follow BIGBETBABA on Kick for live streams and community moments.</p>
           </a>
 
-          <a href="https://discord.gg/XM92x385n" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-emerald-400/35">
+          <a href="https://discord.gg/XM92x385n" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-7 shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-emerald-400/35">
             <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#5865F2] text-white"><Icon type="discord" className="h-9 w-9" /></div>
             <h3 className="text-2xl font-black text-white">Community support</h3>
             <p className="mt-3 leading-7 text-slate-400">Join Discord for reward help, updates, giveaways and announcements.</p>
@@ -404,9 +423,10 @@ export default function App() {
 
   function handleEnter() {
     setScreen("loading");
+    const delay = 1200 + Math.floor(Math.random() * 1000);
     window.setTimeout(() => {
       setScreen("main");
-    }, 1800);
+    }, delay);
   }
 
   if (screen === "loading") {
