@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Icon({ type, className = "" }) {
   const common = {
@@ -28,39 +28,15 @@ function Icon({ type, className = "" }) {
         <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z" />
       </svg>
     ),
+    external: (
+      <svg {...common}>
+        <path d="M7 17 17 7" />
+        <path d="M7 7h10v10" />
+      </svg>
+    ),
   };
 
   return icons[type] || null;
-}
-
-function TestPanel() {
-  const code = "BABA";
-  const links = [
-    "https://kick.com/bigbetbaba",
-    "https://discord.gg/XM92x385n",
-    "https://www.youtube.com/@BIGBETBABA",
-  ];
-  const isSingleStaticLandingPage = true;
-  const alwaysShowsAgeButton = true;
-  const hasThreeSocialActions = true;
-  const hasKickIcon = true;
-  const hasDiscordIcon = true;
-  const hasYouTubeIcon = true;
-  const styleDirection = "doddy-inspired-18-plus-social-landing-page";
-
-  return (
-    <div className="sr-only" data-testid="test-panel">
-      <span data-testid="bonus-code">{code}</span>
-      <span data-testid="links-count">{links.length}</span>
-      <span data-testid="is-single-static-landing-page">{String(isSingleStaticLandingPage)}</span>
-      <span data-testid="always-shows-age-button">{String(alwaysShowsAgeButton)}</span>
-      <span data-testid="has-three-social-actions">{String(hasThreeSocialActions)}</span>
-      <span data-testid="has-kick-icon">{String(hasKickIcon)}</span>
-      <span data-testid="has-discord-icon">{String(hasDiscordIcon)}</span>
-      <span data-testid="has-youtube-icon">{String(hasYouTubeIcon)}</span>
-      <span data-testid="style-direction">{styleDirection}</span>
-    </div>
-  );
 }
 
 function SocialCard({ href, icon, label, action, colorClass }) {
@@ -69,7 +45,7 @@ function SocialCard({ href, icon, label, action, colorClass }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center gap-5 rounded-3xl border border-white/10 bg-black/25 px-7 py-6 backdrop-blur-sm transition hover:border-emerald-400/40 hover:bg-black/35"
+      className="group flex items-center gap-5 rounded-3xl border border-white/10 bg-black/25 px-7 py-6 backdrop-blur-sm transition hover:-translate-y-1 hover:border-emerald-400/40 hover:bg-black/35"
     >
       <div className={`flex h-20 w-20 items-center justify-center rounded-2xl ${colorClass} shadow-lg shadow-black/40`}>
         <Icon type={icon} className="h-10 w-10" />
@@ -82,11 +58,9 @@ function SocialCard({ href, icon, label, action, colorClass }) {
   );
 }
 
-export default function BabaRewardsLandingPage() {
+function PageBackground() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
-      <TestPanel />
-
+    <>
       <div
         className="absolute inset-0 opacity-35"
         style={{
@@ -96,14 +70,18 @@ export default function BabaRewardsLandingPage() {
         }}
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(31,217,132,.18),transparent_34%),linear-gradient(180deg,rgba(7,10,17,.08),rgba(7,10,17,.92))]" />
+    </>
+  );
+}
+
+function LandingPage({ onEnter }) {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
+      <PageBackground />
 
       <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-5 py-10 text-center">
         <div className="mb-10 flex h-44 w-44 items-center justify-center rounded-full border-[3px] border-emerald-400/70 bg-[#111723] p-2 shadow-[0_0_90px_rgba(31,217,132,.20)]">
-          <img
-            src="/logo.jpg"
-            alt="BIGBETBABA logo"
-            className="h-full w-full rounded-full object-cover"
-          />
+          <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-full w-full rounded-full object-cover" />
         </div>
 
         <div className="mb-5 text-lg font-medium uppercase tracking-[0.28em] text-emerald-300 sm:text-2xl">
@@ -114,37 +92,18 @@ export default function BabaRewardsLandingPage() {
           BIGBETBABA
         </h1>
 
-        <a
-          href="#socials"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onClick={onEnter}
           className="mt-12 rounded-sm bg-emerald-400 px-12 py-5 text-lg font-black uppercase tracking-wide text-[#07110d] shadow-[0_0_45px_rgba(31,217,132,.24)] transition hover:bg-emerald-300"
         >
           I'M OVER 18! LET ME IN!
-        </a>
+        </button>
 
-        <div id="socials" className="mt-20 grid w-full max-w-5xl gap-6 md:grid-cols-3">
-          <SocialCard
-            href="https://kick.com/bigbetbaba"
-            icon="kick"
-            label="Kick"
-            action="Watch"
-            colorClass="bg-[#53FC18] text-[#07110d]"
-          />
-          <SocialCard
-            href="https://discord.gg/XM92x385n"
-            icon="discord"
-            label="Discord"
-            action="Join!"
-            colorClass="bg-[#5865F2] text-white"
-          />
-          <SocialCard
-            href="https://www.youtube.com/@BIGBETBABA"
-            icon="youtube"
-            label="YouTube"
-            action="Videos"
-            colorClass="bg-[#FF0000] text-white"
-          />
+        <div className="mt-20 grid w-full max-w-5xl gap-6 md:grid-cols-3">
+          <SocialCard href="https://kick.com/bigbetbaba" icon="kick" label="Kick" action="Watch" colorClass="bg-[#53FC18] text-[#07110d]" />
+          <SocialCard href="https://discord.gg/XM92x385n" icon="discord" label="Discord" action="Join!" colorClass="bg-[#5865F2] text-white" />
+          <SocialCard href="https://www.youtube.com/@BIGBETBABA" icon="youtube" label="YouTube" action="Videos" colorClass="bg-[#FF0000] text-white" />
         </div>
 
         <p className="mt-14 max-w-xl text-xs uppercase tracking-[0.18em] text-slate-600">
@@ -153,4 +112,138 @@ export default function BabaRewardsLandingPage() {
       </section>
     </main>
   );
+}
+
+function MainPage() {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-[#070a11] text-white">
+      <PageBackground />
+
+      <nav className="relative z-10 border-b border-white/10 bg-[#0b0d16]/85 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+          <div className="flex items-center gap-3">
+            <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-12 w-12 rounded-full object-cover ring-2 ring-emerald-400/60" />
+            <div>
+              <div className="text-lg font-black tracking-wide">BIGBETBABA</div>
+              <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">Live community</div>
+            </div>
+          </div>
+
+          <div className="hidden items-center gap-2 md:flex">
+            {[
+              ["Home", "#home"],
+              ["Babayanbreaks", "https://babayanbreaks.com/"],
+              ["Kick", "https://kick.com/bigbetbaba"],
+              ["Discord", "https://discord.gg/XM92x385n"],
+              ["YouTube", "https://www.youtube.com/@BIGBETBABA"],
+            ].map(([label, href], index) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className={`rounded-lg px-4 py-3 text-xs font-black uppercase tracking-[0.18em] transition hover:bg-white/10 ${index === 0 ? "bg-emerald-400/10 text-emerald-300 ring-1 ring-emerald-400/20" : "text-slate-300"}`}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+
+          <a
+            href="https://discord.gg/XM92x385n"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg bg-emerald-400 px-5 py-3 text-sm font-black text-[#07110d] shadow-[0_0_24px_rgba(31,217,132,.22)] transition hover:bg-emerald-300"
+          >
+            Join Discord
+          </a>
+        </div>
+      </nav>
+
+      <section id="home" className="relative z-10 mx-auto max-w-7xl px-5 pb-12 pt-16 text-center">
+        <div className="mx-auto mb-7 flex h-24 w-24 items-center justify-center rounded-full border-2 border-emerald-400/60 bg-[#111723] p-1.5 shadow-[0_0_60px_rgba(31,217,132,.18)]">
+          <img src="/logo.jpg" alt="BIGBETBABA logo" className="h-full w-full rounded-full object-cover" />
+        </div>
+
+        <div className="mb-5 text-base font-medium uppercase tracking-[0.24em] text-emerald-300 sm:text-xl">
+          Premium casino rewards for the community
+        </div>
+
+        <h1 className="mx-auto max-w-5xl text-5xl font-black uppercase leading-[0.92] tracking-[-0.045em] text-white drop-shadow-[0_4px_0_rgba(31,217,132,.16)] sm:text-6xl md:text-8xl">
+          BIGBETBABA rewards and streams
+        </h1>
+
+        <p className="mx-auto mt-7 max-w-3xl text-lg font-semibold leading-8 text-slate-300">
+          Use code <span className="font-black text-white">BABA</span> on Spacehills, join the Discord for updates, and watch BIGBETBABA live on Kick.
+        </p>
+
+        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a href="https://www.spacehills.com/" target="_blank" rel="noopener noreferrer" className="rounded-lg bg-emerald-400 px-7 py-4 font-black text-[#07110d] shadow-[0_0_32px_rgba(31,217,132,.24)] transition hover:-translate-y-0.5 hover:bg-emerald-300">
+            Sign Up With BABA
+          </a>
+          <a href="https://kick.com/bigbetbaba" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/15 bg-white/5 px-7 py-4 font-black text-white transition hover:-translate-y-0.5 hover:bg-white/10">
+            Watch On Kick
+          </a>
+        </div>
+
+        <div className="mx-auto mt-5 flex w-fit items-center gap-4 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-300">
+          Use code <span className="font-mono text-2xl tracking-[0.18em] text-emerald-300">BABA</span> on Spacehills
+        </div>
+
+        <div className="mx-auto mt-12 grid max-w-6xl gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 bg-black/25 p-6 shadow-xl shadow-black/20">
+            <div className="text-3xl font-black text-white">BABA</div>
+            <p className="mt-2 text-sm font-semibold text-slate-400">Community partner code.</p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-black/25 p-6 shadow-xl shadow-black/20">
+            <div className="text-3xl font-black text-white">Kick</div>
+            <p className="mt-2 text-sm font-semibold text-slate-400">Watch streams and live updates.</p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-black/25 p-6 shadow-xl shadow-black/20">
+            <div className="text-3xl font-black text-white">Discord</div>
+            <p className="mt-2 text-sm font-semibold text-slate-400">Join the community hub.</p>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-4 max-w-6xl rounded-xl border border-yellow-300/20 bg-yellow-300/5 px-5 py-4 text-center text-sm font-bold text-yellow-200">
+          18+ only. Gamble responsibly. Never gamble with money you cannot afford to lose.
+        </div>
+      </section>
+
+      <section id="babayanbreaks" className="relative z-10 mx-auto max-w-7xl px-5 pb-20">
+        <h2 className="mb-6 text-4xl font-black uppercase tracking-[-0.03em] text-white sm:text-5xl">Babayanbreaks</h2>
+
+        <div className="grid gap-5 md:grid-cols-3">
+          <a href="https://babayanbreaks.com/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-emerald-400/20 bg-[#101620]/80 p-7 transition hover:-translate-y-1 hover:border-emerald-400/50">
+            <div className="mb-5 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-white p-2">
+              <img
+                src="/spacehills.png"
+                alt="Spacehills logo"
+                className="h-full w-full object-contain"
+              />
+            </div>
+            <h3 className="text-2xl font-black text-white">Babayanbreaks</h3>
+            <p className="mt-3 leading-7 text-slate-400">Visit Babayanbreaks for live breaks, collectibles and community events.</p>
+          </a>
+
+          <a href="https://kick.com/bigbetbaba" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-emerald-400/20 bg-[#101620]/80 p-7 transition hover:-translate-y-1 hover:border-emerald-400/50">
+            <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#53FC18] text-[#07110d]"><Icon type="kick" className="h-9 w-9" /></div>
+            <h3 className="text-2xl font-black text-white">Watch live</h3>
+            <p className="mt-3 leading-7 text-slate-400">Follow BIGBETBABA on Kick for live streams and community moments.</p>
+          </a>
+
+          <a href="https://discord.gg/XM92x385n" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-emerald-400/20 bg-[#101620]/80 p-7 transition hover:-translate-y-1 hover:border-emerald-400/50">
+            <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#5865F2] text-white"><Icon type="discord" className="h-9 w-9" /></div>
+            <h3 className="text-2xl font-black text-white">Community support</h3>
+            <p className="mt-3 leading-7 text-slate-400">Join Discord for reward help, updates, giveaways and announcements.</p>
+          </a>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+export default function App() {
+  const [entered, setEntered] = useState(false);
+  return entered ? <MainPage /> : <LandingPage onEnter={() => setEntered(true)} />;
 }
