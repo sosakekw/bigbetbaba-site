@@ -6,7 +6,7 @@ const LINKS = {
   youtube: "https://www.youtube.com/@BIGBETBABA",
   babayanbreaks: "https://babayanbreaks.com/",
   spacehills: "https://www.spacehills.com/",
-  coinpoker: "https://coinpoker.com/",
+  coinpoker: "https://play.coinpoker.com/register/?offer=poker&referrer=baba",
   clip: "https://kick.com/bigbetbaba/clips/clip_01KQNDG9BK3FBJ72V0WY340WET",
 };
 
@@ -278,7 +278,7 @@ function SpacehillsCard() {
 function CoinPokerCard() {
   return (
     <a
-      href={LINKS.discord}
+      href={LINKS.coinpoker}
       target="_blank"
       rel="noopener noreferrer"
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#53FC18]/20 bg-gradient-to-b from-[#0f1722] to-[#120d11] p-5 text-center shadow-xl shadow-black/25 transition duration-300 hover:-translate-y-0.5 hover:border-[#53FC18]/50 hover:shadow-[0_0_40px_rgba(83,252,24,.14)]"
