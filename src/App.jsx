@@ -6,6 +6,7 @@ const LINKS = {
   youtube: "https://www.youtube.com/@BIGBETBABA",
   babayanbreaks: "https://babayanbreaks.com/",
   spacehills: "https://www.spacehills.com/",
+  coinpoker: "https://coinpoker.com/",
   clip: "https://kick.com/bigbetbaba/clips/clip_01KQNDG9BK3FBJ72V0WY340WET",
 };
 
@@ -248,7 +249,7 @@ function SpacehillsCard() {
       href={LINKS.spacehills}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative overflow-hidden rounded-2xl border border-[#53FC18]/20 bg-gradient-to-b from-[#0f1722] to-[#120d11] p-5 text-center shadow-xl shadow-black/25 transition duration-300 hover:-translate-y-0.5 hover:border-[#53FC18]/50 hover:shadow-[0_0_40px_rgba(83,252,24,.14)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#53FC18]/20 bg-gradient-to-b from-[#0f1722] to-[#120d11] p-5 text-center shadow-xl shadow-black/25 transition duration-300 hover:-translate-y-0.5 hover:border-[#53FC18]/50 hover:shadow-[0_0_40px_rgba(83,252,24,.14)]"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(83,252,24,.12),transparent_48%)] opacity-70" />
       <div className="relative mx-auto mb-4 flex h-16 items-center justify-center">
@@ -265,8 +266,45 @@ function SpacehillsCard() {
         »Code <span className="font-black text-[#53FC18]">BABA</span>«
       </div>
 
-      <div className="relative mt-5 rounded-xl bg-[#53FC18] px-5 py-3 text-sm font-black text-[#07110d] shadow-[0_0_24px_rgba(83,252,24,.16)] transition duration-300 group-hover:bg-emerald-300">
-        Sign up
+      <div className="relative mt-auto pt-5">
+        <div className="rounded-xl bg-[#53FC18] px-5 py-3 text-sm font-black text-[#07110d] shadow-[0_0_24px_rgba(83,252,24,.16)] transition duration-300 group-hover:bg-emerald-300">
+          Sign up
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function CoinPokerCard() {
+  return (
+    <a
+      href={LINKS.discord}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#53FC18]/20 bg-gradient-to-b from-[#0f1722] to-[#120d11] p-5 text-center shadow-xl shadow-black/25 transition duration-300 hover:-translate-y-0.5 hover:border-[#53FC18]/50 hover:shadow-[0_0_40px_rgba(83,252,24,.14)]"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(83,252,24,.12),transparent_48%)] opacity-70" />
+
+      <div className="relative mx-auto mb-5 flex items-center justify-center">
+        <img
+          src="/coinpoker-logo.png"
+          alt="CoinPoker logo"
+          className="h-16 w-auto object-contain transition duration-300 group-hover:scale-105"
+        />
+      </div>
+
+      <div className="relative text-2xl font-black tracking-tight text-white">
+        CoinPoker
+      </div>
+
+      <div className="relative mt-3 text-lg text-white">
+        »Code <span className="font-black text-[#53FC18]">BABA</span>«
+      </div>
+
+      <div className="relative mt-auto pt-5">
+        <div className="rounded-xl bg-[#53FC18] px-5 py-3 text-sm font-black text-[#07110d] shadow-[0_0_24px_rgba(83,252,24,.16)] transition duration-300 group-hover:bg-emerald-300">
+          Sign up
+        </div>
       </div>
     </a>
   );
@@ -658,12 +696,7 @@ function MainPage() {
 
         <div className="mx-auto mt-8 grid max-w-5xl gap-4 md:translate-x-6 md:grid-cols-3">
           <SpacehillsCard />
-
-          <a href={LINKS.kick} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-5 text-center shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-[#53FC18]/35">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#53FC18] text-[#07110d]"><Icon type="kick" className="h-8 w-8" /></div>
-            <h3 className="text-xl font-black text-white">Kick</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-400">Watch live</p>
-          </a>
+          <CoinPokerCard />
 
           <a href={LINKS.discord} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-[#0d121b]/80 p-5 text-center shadow-xl shadow-black/20 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-[#53FC18]/35">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#5865F2] text-white"><Icon type="discord" className="h-8 w-8" /></div>
