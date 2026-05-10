@@ -6,7 +6,7 @@ const LINKS = {
   youtube: "https://www.youtube.com/@BIGBETBABA",
   babayanbreaks: "https://babayanbreaks.com/",
   spacehills: "https://www.spacehills.com/",
-  coinpoker: "https://play.coinpoker.com/register/?offer=poker&referrer=baba",
+  coinpoker: "https://cpfreerolls.com/big-bet-baba",
   clip: "https://kick.com/bigbetbaba/clips/clip_01KQNDG9BK3FBJ72V0WY340WET",
 };
 
